@@ -104,3 +104,52 @@
 
 
 ## Lightning talks
+
+### xlwings and ExcelPython
+* programming Excel from Python
+* packages are complimentary and you can do with them anything you'd like to do with Excel
+* still fairly young
+* can work with higher abstractions (table in sheet)
+* can work with Pandas
+* supports Charting (will on Mac)
+* seems to be Win/Mac only
+
+### Packaging is AWESOME
+* slightly better than it was and continually improving
+* a lot going on (easy install, egg, virtualenv, setup.py, pip, cheese, twine, distils, setuptools...)
+* packaging.python.org (single point of documentation)
+	* kept up to date
+	* not complete (mostly edge cases)
+* Open Space: Thursday 11:00
+
+### django-reportmail
+* manage command as nightly batch
+* [django-reportmail](https://github.com/hirokiky/django-reportmail)
+* library for sending report mail of django management command easily
+* some will recommend Sentry, but it requires a lot of resources
+
+### PSF
+* everyone can become member of Python Software Foundation now
+
+### Flying Elephant
+* investor seeking investments (50-200k euros of seed capital)
+* you need to come to Berlin for first few months
+
+### Architect - Object Relational Mapper's best friend
+* automatic table partitioning
+* works with py 2.6 - 3.4
+* no external dependencies
+* 92% test coverage
+* MySQL and Postgres
+* supports Django, Pewee, SQLAlchemy...
+* [Architect](https://pypi.python.org/pypi/architect/0.2.0)
+* [https://github.com/maxtepkeev/architect](https://github.com/maxtepkeev/architect)
+
+### mate light
+* display made out of Club Mate bottles and crates
+* installation is usually at [c-base](http://c-base.org)
+* each bottle has one LED and there's ~600 of them (?)
+
+### Redhat project for automating stuff
+* for automating everything related to programming except programming
+* DevAssistant
