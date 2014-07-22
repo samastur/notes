@@ -194,5 +194,127 @@ You are done! (but test your results!)
 * write servers in Twisted
 * use pyOpenSSL
 
+
 ## Message-passing concurrency for Python (Sarah Mount)
 Interesting talk, but I couldn't take notes because I was standing. Worth checking out online.
+
+
+## Jigna: a seamless Python-JS bridge to create rich HTML UIs for Python apps (Prashant Agrawal)
+* a bridge to create live, HTML UIs for Python apps
+* uses traits and PyFace (generic framework over UI toolkits like PyQt, wxPython)
+* [website](https://github.com/enthought/jigna)
+* automatic model-view binding
+* HTML template is live (view updates as data changes)
+* declarative UI code (HTML)
+* not just for traits
+* what it is NOT:
+	* not another UI toolkit
+	* an HTML widget library
+	* a web framework like Django/Flask
+* this is purely desktop, not web (uses QWebView for rendering interface)
+* Python domain model <-> JS proxy for Python model <-> HTML live template
+* QtWebView is used for handling hand-off between python and JS proxy and Angular for rendering template (second hop)
+* can be used on web, but they don't promote it for this because they feel it doesn't solve (all) problems
+
+
+## How to make a full fledged REST API with Django OAuth Toolkit (synasius)
+* raison d'être: lots of internal projects that should be integrated; also 3rd party implications that would use it
+* flat API structure (default Django REST Framwork (DRF) approach)
+* intro into DRF use
+* how to authorise client applications?
+* problems:
+	* store the user password in the app
+	* the app has a full access to user account
+	* user has to change his password to revoke the access
+	* compromised apps expose the user password
+* OAuth2 framework solves above problems
+	* Django OAuth Toolkit support Dj1.4+
+* fuck it; it moves too quickly for note taking 
+* Future plans:
+	* OAuth1 support
+	* OpenID connector
+	* NoSQL storages support
+* [Github home](https://github.com/evonove/django-oauth-toolkit)
+* this implements server side of OAuth and can't be used for client oath apps
+
+
+## Lightning talks
+
+### Elliptics
+* distributed fault tolerant key-value storage
+* http://github.com/reverbrain/elliptics
+* fast http-proxy with S3-like API
+* full S3-compatible proxy is being developed now
+* rich and powerful Python API. Supports async operations
+
+### super()
+* super() is interesting and useful
+* MRO: an ordering of an inheritance graph
+* C3: the algorithm for calculating MRO
+	* derived classes come before base classes
+	* base class definition order is preserved
+	* 1 and 2 are preserved at all points in the graph
+* C3: some inheritance graphs are illegal!
+* super(): given a method resolution order and a class C in that MRO, super() gives you an object which resolves methods using only the part of the MRO that comes after C
+
+### Pycon Finland
+* heat waves unlikely
+* [fi.pycon.org](http://fi.pycon.org)
+
+### TL;DR of PyLadies
+* around since fall 2011
+* mentorship and support
+* in about 50 locations around the world
+* why start it?
+	* be the motivation for you to learn or better your Python knowledge
+	* leadership and org. experience
+	* take over the world
+* pip install pyladies (yes, literally)
+* then run: pyladies handbook (gives you handbook and checklist how to start your own chapter)
+* also provides assets and images, workshop materials...
+
+### iktomi forms
+* generic tool for working with web forms
+* validate user input
+* convert to internal representation
+* render forms, display validation error
+* work with nested data structures
+
+### ZeroVM
+* virtualisation designed for the cloud
+* not Docker
+* not a drop in replacement for <insert name of VM/container here>
+* not NaCL but based on it
+* open source sponsored by Rackspace
+* low overhead, fast startup, very secure
+* no sources of entropy (like time and random)
+* programs are like (pure) functions
+* no state
+* I/O: "channels" (file, socket...) which need to be defined before startup
+* nasty code can only do nasty things to itself
+* embed in data stores -> send code to the data (like OpenStack's swift)
+* lang support: C, C++, Python, Lua
+* middleware for Swift (ZeroCloud)
+* developer tools and debug/testing tools in Python
+* [ZeroVM](http://zerovm.org)
+
+### argument clinic
+* the problem: os.dup2(h, h2) -> cpython -> posix_dup2()
+* how do we turn those Python objects to posix_dup2 integers? specifying same informal at lots of places
+* argument clinic is a tool Larry Hastings wrote to make this easier by providing formatted C comments defining lots of that stuff
+* further reading: PEP 436 (./Tools/clinic/clinic.py in Py distribution)
+
+### PEP 473
+* motivation are errors when writing tests:
+	* typos
+	* ...
+* provide more information when things go wrong (e.g IndexError could tell which index was problematic)
+
+### Professionally Paranoid Python Core Committer
+* Python security response team
+* use tool Coverity Scan (commercial but available to open source) to search for security problems
+* PEP 456: secure and interchangeable hash algorithm (in Py3.4)
+* PEP 446: newly created file descriptors are not inheritable (Py 3.4)
+* isolated mode in Py3.4: ignore Python env vars...
+* lots of goodies in Python 3
+* several security features will be back ported to 2.7
