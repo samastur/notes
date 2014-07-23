@@ -1,15 +1,15 @@
 # Wednesday, 23.7
 
-## Our decentralized future (Pieter Hintjens)
+## Our decentralised future (Pieter Hintjens)
 * Pieter: fighter agains software patents, ZeroMQ developer, book writer
 * ZeroMQ first community he has been in where there is no fighting (few flame wars), which is unusual in large projects
-* ZeroMQ does not do design, meetups to discuss what will come, no wishlists, no irc...occasionally have beer
-* it is not accidental, because they developed over time a process of working which was to move away from centralization
-* world we live in is about decentralization, giving up control (food supply for a city has nobody in charge)
-* so why do we accept centralization in our software projects?
-* ZeroMQ community mimicks their tool (async, decentralized, no locks...)
+* ZeroMQ does not do design, meet ups to discuss what will come, no wish lists, no irc...occasionally have beer
+* it is not accidental, because they developed over time a process of working which was to move away from centralisation
+* world we live in is about decentralisation, giving up control (food supply for a city has nobody in charge)
+* so why do we accept centralisation in our software projects?
+* ZeroMQ community mimics their tool (async, decentralised, no locks...)
 * the future of computing is distributed if we like it or not; you won't have a job if you will not be able to build for this world
-* how do we build decentralized systems? we can't, we grow them organically
+* how do we build decentralised systems? we can't, we grow them organically
 * internet is a set of protocols (RFCs), a set of contracts
 * most of the work was done without actual real fighting at all (??)
 * alternatives had good developers producing good software, but failed
@@ -19,7 +19,7 @@
 * so the current process is you send a pull request to master and Pieter will merge it (there's a little bit of filtering for sanity, but not much); maybe their patch is not the right patch, but their presence is the right presence
 * the quality of patch is measured not by its beauty, but how accurate and relevant it is; Wikipedia was the model for development approach
 * only market can write the software that the market needs
-* software we build will reflect structure of the organization that built it
+* software we build will reflect structure of the organisation that built it
 * how do you come back to quality with ZeroMQ approach? (question from the audience)
 	* allow mistakes, but work on quickly fixing them (let people learn from them)
 	* if you can make mistakes quickly, you can also fix things quickly
@@ -34,14 +34,93 @@
 	* you have authority in anarchy, but anybody is free to chose the one they like best
 	* there is and has to be authority because who will enforce contracts (people will cheat); there is always a small percentage of dedicated cheaters and they will do great damage to communities
 	* he had bad experience with people like that in FFII where he wanted to run by consensus
-* question: you can have power without realizing or accepting that you do (white male); how does such process take into account diversity?
+* question: you can have power without realising or accepting that you do (white male); how does such process take into account diversity?
 	* he can't talk about diversity, but can talk about work done to remove obstacles to contributing
 	* he thinks the process is competitive and may have certain communication patterns which may lead to most contributors being male
 	* he's an Adam Smith type believer in free market; differences are valuable
 	* he accepts that he is biased, but he can't see it (he suspects that gender bias is not the biggest one; there's age bias, race...)
 * question: do you think people will chose the best software for their own benefit?
-	* what is most interesting in software is chosing the right problems and solving the right (biggest) problems first
+	* what is most interesting in software is choosing the right problems and solving the right (biggest) problems first
 	* what ZeroMQ community tries to do is to identify those problems
 	* it is fundamentally up to users to decide what is right for them; he can't
 * question: is this a different management style? what about the size of community?
 	* he doesn't think it's about scale; you have to decide what kind of approach you want to use
+
+
+## Writing multi-language documentation using Sphinx (Markus Zapke-Gründemann)
+* Sphinx: Python documentation generator with reStructuredText markup language
+* output formats: HTML, LaTeX (PDF). ePub, Texinfo, manual pages, plain text
+* [sphinx-doc.org](http://sphinx-doc.org)
+* i18n: translating into other languages without changing the code (GNU get text is used frequently)
+* why use get text for docs?
+	* untranslated strings are display in the source language
+	* markup is not duplicated
+	* professional translation tools can be used
+	* contributions possible without using a VCS
+* check http://sphinx-doc.org/intl.html
+	* .rst use to generate .pot with sphinx-build get text from which you get .po with Pootle
+	* sphinx-build -Dlanguage gets you translate build
+* gettext_compact = True (merge catalogs in fewer files)
+*  pip install sphinx-into
+* workflow:
+	* make get text
+	* sphinx-into update -l de -p _build/locale
+	* then translate documentation
+	* sphinx-into build
+	* make SPHINXOPTS="-Dlanguage=de" html
+* [transifex](http://www.transifex.com) is a web service for localisation that is free for open source where people can collaborate on translating
+* sphinx has support for transfix (tx tool and options for sphinx-intl):
+	* tx push and pull for exchanging data
+* using code inside the documentation: use English in examples to make translations easier
+* how to handle URLs: use the inline syntax because otherwise it is lost
+* you can use the ext links extension to define URLs in the configuration to maintain versioned URLs
+* ifconfig construct can be used to handle special cases (e.g. ifconfig:: language == de)
+* make SPHINXOPTS... linkcheck can be used for checking links
+* still missing:
+	* a translations settings to build all languages with a single command
+	* a way to add a "landing page"
+	* use gettext_compact to create a single catalog
+	* collect all indices into a single .po file
+	* a language switch template
+
+	
+## gevent: asynchronous I/O made easy (Daniel Pope)
+* example very similar to BaseHttpServer that starts a server which seems to be very scalable
+* can use urllib2 unchanged with monkey path
+* check slides and/or talk; hard to take notes for
+* drawbacks of threads:
+	* terrible performance (GIL)
+	* threads in Linux allocate stack memory (see limit -s)
+* drawbacks of processes:
+	* no shared memory space
+	* high memory use
+* pitfalls of callbacks (callbacks are the new Goto)
+	* untidy code structure...
+* better: method-based callbacks in Twisted (but doesn't really deal with the problem)
+	* still splits processing into multiple chunks
+	* difficult to combine with other classes
+* same approach can be used in asyncio with same problems
+* generator-based coroutine (Tornado and new asyncio in 3.4):
+	* using "yield"" and "yield from" to break out of stack
+* example with @asyncio.coroutine looks much more readable (similar in Tornado)
+* generators vs coroutine
+	* generators provide coroutine-line functionality
+	* but can only yield to their called
+	* full coroutines can yield to any other coroutine (stack)
+	* ...
+* greenlets/green threads: gevent simpler because we don't need to use yields anymore
+* Gevent: green lets plus monkey-patching
+* monkey-patching bad?
+	* works with any sync pure python code
+	* generally works with async code too (only select() is emulated)
+	* is optional (can't rely on it if writing libraries; can enforce in frameworks)
+* always patch before any other import
+* think of it as distribution of Python
+* can spawn and kill greenlets easily
+* has support for Semaphores, Locks... (less important than in threads because everything runs on one processor)
+* business logic can call async code without being aware of it being async (and also vice versa)
+* doesn't work on Py3 yet and there exists the possibility of deadlock between greenlets.
+* pitfalls:
+	* actual blocks (C libs...) halts everything
+	* keeping the CPU busy prevents other green lets getting service
+	
