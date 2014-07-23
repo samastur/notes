@@ -123,4 +123,89 @@
 * pitfalls:
 	* actual blocks (C libs...) halts everything
 	* keeping the CPU busy prevents other green lets getting service
-	
+
+
+## Design Your Tests (Julian Berman)
+* tests are code
+* good coding principles that translate directly:
+	* do one thing
+	* simple is better than complex
+	* test one thing
+	* transparent is better than terse
+* three step process: set up, exercise and verify
+* what's the benefit of having one assertion per test?
+	* the most important things about tests are failure; larger assertions give more context
+	* sometimes one assert per test is not possible or useful
+* two types: assertEqual and assertStatels (difference between asserting on data and some state of object)
+	* compare some strings vs compare some HTML
+* he defines his own asserts for handling more complex assertions (e.g. checking status code and mime type of a response together with its content)
+	* order assertions in complex cases in the order of importance (e.g. content before checking content length)
+* higher order assertions (assertRenders, assertValidHTML, assertHasContent, assertEqual)
+* next steps:
+	* mixin hell: GDBMMMixin, LoggingMixin, MagneticLoggingMixin, ResponseContentMixin, StatsdMixin, SaveMeMixin (mixins from author's company)
+	* testtools.matchers (presumably better solution; check out)
+* share your test helpers!
+* if you find cases where you want to test only parts of the data (so need more assertions), look at code to see if what you are testing shouldn't return multiple objects (me: obviously doesn't work in case of Django's context data)
+* sometimes it's nicer to shove results of complex assertions into container to return results of all of them (to avoid running tests multiple times); preferably not
+
+
+## Supercharge your development environment using Docker (Deni Bertovic)
+* what is docker?
+	* light weight containers to isolate process to run
+	* available on most linux distress with recent kernel
+	* one process per container (best practice); can run more
+* used terms:
+	* image - immutable snapshot of a container
+	* container - a running instance of an image
+	* docker file - DSL for building new images
+	* Hub (registry) - a central hub for sharing images
+* it's fast with minimal overhead/resource usage and easy to run your whole production stack locally
+* everyone on the team runs the same database, cache, amqp, c libraries...
+* how to run containers? (docker run -i -t debian /bin/bash for interactive or -d for daemon)	* docker run -d -t postgres
+* docker ps (lists all running containers; returns containers ids that you can use for other commands like log, kill...)
+* images not prefixed by username on hub are maintained by the core team
+* docker files: small DSL for building image
+* on mac: use boot2Docker (runs then in virtualbox)
+* how does docker fit into your dev environment?
+	* important to run the same software in development and production
+* NOTE: fast talking speaker; check the talk online
+* because containers can't change, you have to mount volume to where data can be saved
+* running your web app in a container:
+	* simplify runtime
+	* make sure everyone runs the same version of reps
+	* what about virtualenv? --> C libraries!
+* automation: use makefiles or shell scripts
+	* sometimes they are not enough; then there's docker-py (https://github.com/dotcloud/docker-py)
+* if you already use ansible/chef/puppet: you can use both together
+* better to run one process per container because it makes it easier to update (replace) it
+* fig: sort of vagrant for docker (configuration described with yaml)
+* summary: run your production stack in dev, uses the same env everywhere and upgrade separate components more easily
+* didn't touch deployment because of time, but he believes it simplifies it
+* editing code is done by mounting it as a volume that is accessible at know position to docker container
+* EU regulation make saving images to central hub a problem! (data protection)
+
+
+## Advanced Uses of py.test Fixtures (Floris Bruynooghe)
+* way back and difficult to read slides
+* fixtures are powerful:
+	* dependency injection
+	* isolated
+	* composable
+* caching fixtures: fixture decorator has optional scope argument (e.g. scope='session' or 'function' so you can limit how many times it is called; values: session, module, class, function)
+	* great for stable and expensive fixtures
+* fixtures can have fixtures too (so they can be composed for example to pass db connection)
+* fixtures can trigger skipping/failing of all dependent tests with pytest.skip (and pytest.fail): both of which will stop execution of the test that uses this fixture
+* marks: run tests based on markers (aka tags)
+	* make them strict (so you have to declare markers upfront and can catch possible marker typos)
+* autouse fixtures (setup/teardown without explicit request)
+	* @pytest.fixture(autouse=True) so it is called every single time
+	* if combine with scope than you can limit to when it is run
+* parametrising fixtures (pass params=... which inside of fixture can be accessed with request.param)
+	* individual fixtures can be parameterised
+	* multiple parameterised fixtures combine
+* skipping parameters: skipping can be done on a parameter level
+* accessing fixture info (find out what other fixtures are requested):
+	* use request.fixturesname in fixture to get names of all applied
+* plugins and hooks
+* using command line options (new options can be accessed from fixtures and tests)
+	* can be used for example to make sure that skipping is not allowed on CI server
