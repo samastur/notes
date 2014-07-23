@@ -209,3 +209,59 @@
 * plugins and hooks
 * using command line options (new options can be accessed from fixtures and tests)
 	* can be used for example to make sure that skipping is not allowed on CI server
+
+
+## Lightning talks
+
+### PostgreSQL and Python
+* you can write stored procedures in Python (importing any module)
+	* example of doing JSON type validation using Python in DB
+
+### Facebewk
+* ~150LOC python client for the graph API from Facebook
+*  results look like dicts where lib transparently makes requests for more data when drilling down
+
+### YAML Reader
+* modularised configuration made easy
+* https://github.com/ImmobilienScout24/yamlreader
+
+### xz
+* apt-get install xz-utils liblzma-dev
+* pip install lzmaffi
+* I think it is for searching efficiently inside of compressed files (e.g. log files)
+
+### Pycrastinate
+* TODO less, DO more
+* htts://github.com/isaacbernat
+* find, act and analyse TODOs & friends (e.g. FIXME)
+	* find marked problems, filter them (e.g. limit to one created in chosen period), send reports or notifications
+* convenient: use it out of the box; no weird formats
+* no setups: the only dependency is py 2.7/3.3+
+* modularity: easily extensible to meet your needs
+* speed: django <3.5s to go through 250k lines
+
+
+### Chirp - what the beep is R2D2 saying?
+* sharing stuff between mobiles using sound
+* he reverse engineered bits of it so you can chirp with python (proprietary app otherwise)
+
+
+### Strace to the rescue
+* run your program with strace and it shows all the system calls its making
+* it produces a lot of output, so you start at the end of it and work up to find your error
+
+### Summer camp for python people
+*  summer 2015
+*  bieszczady, poland
+*  http://pythonfest.com
+
+### Django Girls
+* is an one-day workshop for women who want to learn about technology
+* had 300+ applications from 33 countries; had 15 countries
+* tutorial.djangogirls.org (also github.com/DjangoGirls)
+* happy to accept pull requests
+* http://djangogirls.org
+
+### EuroPython 2015
+* might not happen in Berlin next year
+* EPS removed 2015 approval; the reason is different approaches in organising the conference
