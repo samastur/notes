@@ -89,7 +89,7 @@
 * when working with ES you work with cluster with nodes; shard is basically a lucene index which can span more than one node
 * lots of ES docs assume familiarity with Lucene
 * within Lucene index you have segments which contain data structures like inverted index of terms, frequencies and values
-* prefix searches are cheap so you all searches try to be converted to them
+* prefix searches are cheap so you all searches try to be converted to them* 
 * when you work with search text processing is really important
 * **WATCH VIDEO OF THIS TALK** (this notes are very much incomplete)
 * field cache is loaded into memory if not specified otherwise which makes it fast, but uses tons of it
@@ -105,3 +105,42 @@
 * queries are not cached like filters because they are scored (how well it matches)
 	* when possible use filters and use queries only when you need scoring
 * talk based on article on [foundation section of their website](http://found.no/foundation)
+* having things in multiple shards can yield a different result than if everything is stored in one; it's also slower so you should prefer fewer of them
+
+
+## Lessons learned from building Elasticsearch client (Honza Král)
+* were not happy with existing clients because they all lacked something
+* ES: distributed, REST API
+	* different deployment environments
+	* 96 API endpoints
+	* 672 parameters
+* what clients? multiple languages and they wanted them to be true to their language
+* no opinions! (so there would be no excuses to using it)
+	* low level
+	* extensible/modular so you can change parts you don't like
+* examples of how to use your own selector class or serializer
+* it is very difficult to make a design that works for different languages so they created a prototype (spike) for python in ruby to explore this
+* don't send a man to do a machine's job (like achieving consistency)
+	* you don't want to manually track ~100 APIs with ~700 parameters
+* they tried reference implementation for APIs, but it doesn't really scale well (they only have one person per language)
+* next they looked at documentation; no go either
+* they extracted API definitions:
+	* machine parseable (JSON)
+	* human readable (JSON)
+	* pre-generated from Java (static languages FTW)
+* documented:
+	* URL path (including dynamic parts)
+	* HTTP methods
+	* Query parameters
+	* Body descriptions
+* they didn't capture all the dependencies (this is valid only with that...); they didn't want to handle this in client
+* rest-api-spec is part of ES repo and is used in main test suite
+	* serves as reference for developers
+	* scripts to generate clients
+* test everything!
+* created unified test suite that enabled code to run also against all the clients
+	* running as part of Java test suite
+	* version specific
+	* integration testing
+* when they needed to write the 5th client, they only needed few weeks for that
+* next stage will be writing more opinionated clients
