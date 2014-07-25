@@ -127,3 +127,5 @@
 * add the header to store in browser that page has to be loaded over https
 * [HSTS](https://www.owasp.org/index.php/HTTP_Strict_Transport_Security)
 
+### Stackless - best ever
+* try stackless; it became much better, more compatible
