@@ -102,3 +102,28 @@
 	* need to consistently test with all three tools
 	* only useful in very special circumstances
 * setup methods in xUnit classes are basically autouse fixtures
+
+
+## Lightning talks
+
+### Sparts - quick service prototyping
+* building a service:
+	* cli arguments, logging, service setup, tasks management and implementation
+* with Sparts you only need to do implementation
+* nice example
+* lots of supported tasks
+* https://github.com/facebook/sparts
+
+### Django under the hood
+* Amsterdam, 14.-15.11.
+* [http://www.djangounderthehood.com/](http://www.djangounderthehood.com/)
+* learn about internals of Django (audience: experienced Django developers)
+
+### Foreman client
+* a complete life cycle management tool for physical and virtual servers
+* client generated from documentation
+
+### HSTS
+* add the header to store in browser that page has to be loaded over https
+* [HSTS](https://www.owasp.org/index.php/HTTP_Strict_Transport_Security)
+
