@@ -60,3 +60,45 @@
 * **aside**: `assert 0, db` it will show what db is (Python thingie) useful for seeing what gets in when you don't know
 * you can also directly parametric test using `@pytest.mark.parametrize("params", [param_values])`
 	* `@pytest.mark.parametrize("arg1,arg2", [(1, 1), (2, 3)])` would provide arg1 and arg2 with first tuple and then second tuple
+* you can compose fixtures (e.g. application object fixture can get db object from a db fixture)
+* **recommended**: fixtures usually end up in conftest file
+	* thinking about displaying ascii-art graph of fixture relationships (currently you need to look at code)
+* fixture visibility:
+	* fixture that depends on other fixture can't have a more permissive scope than the one it depends on
+	* fixture methods available only to test methods on that class
+	* fixtures defined in a module available only to tests in that module
+	* fixtures defined in `contest.py` file are available to tests in that directory and subdirectories
+	* fixtures defined in a plugin are available everywhere
+* builtin fixtures:
+	* `tmpdir` a fresh empty directory for each test invocation
+	* `monkeypatch` temporarily modify external state for test duration
+	* `capsys` and `capfd`: capturing stdout/stderr in a test
+	* more provided by plugins
+	* **use py.test --fixtures to see available fixtures with docs**
+* auto use fixtures: if you want to prepare the test environment before any test is run, a fixture can take `autouse=True` so it will be used every time without anybody needing to think about
+	* is run even without test requesting it, but returns an object for those that might need it
+* migrating to py.test, strategies:
+	* make py.test run your existing test suite
+	* don't aim for running pytest suites through unittest/nose
+	**start using pytest fixtures incrementally**
+* py.test and unit test:
+	* supported:
+		* pytest can collect and run `unittest.TestCase`
+		* honours `setUp/ClassModule` and teardown methods
+		* interprets `unittest.skip`
+	* differences:
+		* based on python importing instead of filesystem
+		* with `py.test --pyargs some.path` the filesystem path is derived from the python import path of `some.path`
+* py.test and nose:
+	* supported:
+		* pytest can collect and run nose-style tests/setup
+		* SkipTest exceptions, markers, setup/teardown decorators
+	* not supported:
+		* nose config and nose-style doctests
+		* test module reloading/shadowing
+		* unittest-style `setUp*` on plain test classes
+* why avoid cross-tool test suites?
+	* dooms you to use minimum common denominator
+	* need to consistently test with all three tools
+	* only useful in very special circumstances
+* setup methods in xUnit classes are basically autouse fixtures
