@@ -48,6 +48,8 @@
 	* nonverbal communication is a physical machine detectable evidence of social and psychological phenomena
 	* interdisciplinary approaches can perform better (including both human and computing sciences)
 	* real world applications are the next frontier in terms of data, problems and methodological issues
-	
+
+
 ### Questions
 * how do you find relevant traits? start with psychological interaction and deconstruct psych. phenomena involved, but no step-by-step guide (helps to talk to psychologists)
+* are results generalisable? they are trying to find out how perception is dependant on culture and context
