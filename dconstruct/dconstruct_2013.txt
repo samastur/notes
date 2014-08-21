@@ -1,0 +1,135 @@
+dConstruct 2013
+===============
+
+Amber Case: Ambient Location and the Future of the Interface
+------------------------------------------------------------
+- we are all cyborgs because we all use external interfaces to act in spaces (or something like it)
+- computers devices that are larger on the inside: we can take anything into them or out them without them getting heavier
+- cyborg anthropology is part of anthropology
+- Steve Mann, 1981: loaded with heavy "wearable" computing apparatus
+- worked on changed reality (not augmented) - wanted to take bits away (censor reality)
+- after a while started using it for more mundane uses (contextual notification system - remember to buy milk)
+- Mann: computers should conform more to us (not having to hunch over keyboard)
+- mouse: persistant architecture (everyone buys them so difficult for alternatives to prosper)
+- calm technology: there when you need it and not when you don't (amplify your life)
+    - actions as buttons
+    - invisible interfaces
+    - ambient notifications (lights turn on when you get home; off when leave)
+- memoto (takes pictures all the time); created in Sweden
+- CT: abstract away interfaces that can be (get location, time etc. from env)
+- Making the invisible visible: example: maps of movement (take location every x interval and plot)
+- Geologi: your phone will become a remote control for reality (uses for real-time location)
+    - add anonymous messages to map that can be seen when being in neighborhood
+    - real-time hyperlocal weather notifications
+- mapattack.org (real-time life "pac-man")
+- bringing static content to life
+    - pinball machine database (notifications) ??
+- OBSERVATION: a bit obsessed with serendipity
+- locations isn't enough: I don't know enough about myself (have plenty of friends and a wife): Jon Lebovsky
+- correlation of multiple datasets == meaning
+- we have frictionless datga gathering, but not frictionless correlation
+- the best tech is invisible: get out of the way and help people live their lives
+
+Luke Wroblewski: Infinite Inputs
+--------------------------------
+- we are going to build on top of that revolutionary interface with software
+    (Jobs on multi-touch in original announcement of iPhone)
+- keyboard has a ton of utility that gets underutilized especially on web
+- we have 30 years of tinkering with mouse-keyboard interfaces
+- multi-touch move to direct manipulation
+- Google has a multi-touch friendlier data picker (not just a desktop contorl shrinked to touchscreen as kayak does)
+- each time new input devices comes out, there's a lot to learn
+- even more challenging now when we have to design for both: indirect and direct manipulation
+- new kinds of interfaces using: ambient light, gps, mic, accelerometer, camera...
+- 2011: nfc, front-camera, gyroscope,...
+- accel, magnetometer + gyro: 9-axis motion and orientation sensing
+- Siri is an alternative- parallel interface to iOS
+- smart stay: display and plays video as long as you look at phone (face recognition)
+- we now have 13 input types to build on (mobile inputs)
+- Kinect
+- ultrabooks have many of the same inputs now
+- Glass interesting because it has all sort of new input types (head nod, wink, putting glass on/off...)
+- bluetooth LE: micro-location and low energy use (built in recent iPhones and high-end Androids); CHECK
+
+Nicole Sullivan: Don't Feed the Trolls
+--------------------------------------
+- troll: people who SEEK conflict and feed on ATTENTION
+- if mailing list discussion goes of the rails, release something interesting
+- recognizing trolls (with examples):
+    - jealous: I did everything you did, only five years ago and better
+    - the grammar nazi: go back to school and learn to spell, then maybe someone will take your ideas seriously
+    - biased troll: humans are subtly biased - pattern matching machines. We expect others who do what we do to be like us
+    - scary troll: how long are you going to lead the web astray before you just disappear?
+        - get support; ideally without feeding the trolls
+- Tantek did the taxonomy of trolls (TrollTaxonomy on his wiki)
+- nonviolent communication: a language of life (book; a bit hippie)
+  crucial confrontations (Kerry Patterson...); more business like
+- internal trolls: harder to identify because we like to believe we are not asshats; feeds on inattention
+- Project Implicit: uncovers bias  (http://goo.gl/2601D or ID)
+- change is made by simply non-judgementally *noticing* what things aren't right
+- group IQ: does groups which outperform are the more diverse, especially by gender
+
+Simone Rebaudengo: Great things are connected, but what will they actually talk about?
+--------------------------------------------------------------------------------------
+- funny and sad how most products about future look at it in really utilitarian way (utilitarian future)
+- products are people too (Matt Webb)
+- connectivity is a dsitinct moment in product life; its main goal is to be used (peaceful learning)
+- disruptive realizations (products could compare on how much they are being used; peer pressure between products)
+- the addiction of a product: could use of product change the product to want to be used more  (how would that look like?)
+- toaster: ubiquitous, anonymous and stereotype of connected products
+    - a toaster pleasure comes from making toast
+    - if connected to others, is it used a lot; what can it do about it?
+        - need to know, needs to sense and needs language to communicate
+    - use toaster and other start to wiggle levers to be used
+- what can it do to subtly be used more? could it use other objects or say about owner to others for support?
+- what if others interested in it could reach it?
+- drastic choices: find another owner; become unbearable or sustainable suicide
+- hosted toasters: could get picked up if not used enough so people started making parties to have them used enough
+- what if really a product would be owner of itself?
+
+Sarah Angliss: Tech and the uncanny
+-----------------------------------
+- book about radio: Haunted media (look it up!)
+
+Keren Elazari: The Heroes and Anti-heroes of the Information Age
+----------------------------------------------------------------
+- www.k3r3n3.com
+- the only way of discovering the limits of the possible is to venture a little way past them into the impossible
+- people who can manipulate technology have the power today (me: not quite)
+- stuxnet changed the world: first cyberweapon written in one part of the world that caused destruction in completely different
+- crypto party: local gatherings to learn how to use crypto and exchange keys
+
+Maciej Ceglowski: Fan is a Tool-Using Animal
+--------------------------------------------
+- check video/slides for really powerful use of tags (don't strip punctuation!)
+- completely awesome example of fanfic community at work
+- fans are SO NICE
+- fans fight censorship! (often the first victims of it)
+- fans fight for privacy (not ashamed of what they are doing; but pseudo/separate identity gives them freedom and demonstrate you can have a healthy communitylike that)
+- fans never sold out; they transgress
+- fans improve our culture (tv shows suck less than they used to because the fandom picking stuff apart made us more sophisticated)
+
+- social is not a syrup, not even a noun (real community are people who have a long memory and history)
+- don't make it too easy (you have to be committed to start contributing; bad interfaces protect from drive-by comments)
+- stop futzing with it (if it's good, leave it; e.g. LJ limited number of avatars user could use which were used as a form of communication)
+- shut up and listen (they may be using in ways you are not familiar with)
+- breakups are hard (they won't return easily)
+- fandom changes lives (a meaningful part of lives of many)
+
+Dan Williams: Unexpected Item in The Bagging Area
+-------------------------------------------------
+- pervasive media studio (sounds like a place we need in Slovenia; CHECK OUT)
+- anticipatory design science (designing solutions for problems that are not quite ready to be solved)
+- Whole Earth Catalog by Stewart Brand
+- millions of mobiles made everything that they are built out of very cheap (keyring with 720p camera rings)
+- manifesto for CCTV filmmakers (making movies with CCTV only cameras)
+- problem: companies assume algos for recognizing faces and moods are accurate; they aren't
+- not sure he whishes to accept all technologies we create
+- someone created makeups and haircuts to confuse face recognition algos/libs
+- critical engineering (search for this term!)
+- when we create tech that want to create sense of wonder, we create egotistical stuff
+- http://iamdanw.com/said/unexpected
+
+Adam Buxton: 'Is My Laptop Ruining My Life?'
+--------------------------------------------
+- funny, but nothing really to jot down
