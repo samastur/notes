@@ -8,7 +8,7 @@
 ## Georgina Voss: Tethering the Hovercraft
 * observed that it's the last part of delivery (bringing to the house) that is main point of friction, unhappiness
 * it's amazing long, complicated journey that ordered stuff goes through and then at the very end of it delivery often fails
-* blonsky device (??): facilitating birth of a child with centrifugal force
+* Blonsky device: facilitating birth of a child with centrifugal force
     * never produced for very good reasons
     * patent been cited 14 times; even by NASA
 * some ideas don't travel even when they are good: forceps
@@ -107,8 +107,7 @@
 * with print each copy was the same and did not introduce new errors; typographical fixity is a basic prerequisite for the rapid advancement of learning (source: Eisenstein)
 	* new versions could improve instead of deteriorate
 * hypertext opens collaboration wider than it could ever be before (example: Wikipedia)
-* lots of hopeful and positive views of what our hypertext media could be, 
-* but mostly isn't
+* lots of hopeful and positive views of what our hypertext media could be, but mostly isn't
 * there is no neutral ground in technology; there is no safe place to stand
 * * turned more realistic in last third, but no new insights; a call to action for positive change
 
@@ -147,7 +146,7 @@
 
 ## Cory Doctorow: Information Doesn't Want to be Free
 * most people trying to earn money in creative arts will fail and that was always so
-* arts are foundationaly non-economic activities
+* arts are foundationally non-economic activities
 * our priority shouldn't be to preserve business models
 * 3 laws:
 	* anytime puts a lock on your stuff and doesn't give you key, they didn't put it there for your benefit
