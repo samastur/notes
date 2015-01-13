@@ -1,0 +1,174 @@
+dConstruct08 (tag: dconstruct08)
+================================
+
+Steven Johnson, The Urban Web:
+- london in 19th century was an environment that was very smelly
+- wrong conclusion that disease comes from stench (miasma theory; probably wrong spelling)
+- john snow had his theory on cholera before, but he couldn't convince others
+- line around map represents time; it represents people for whom it was faster to go
+	to contaminted pump than to others
+- concentrations outside of line prove that it's not smell, since pumps smell doesn't
+	reach so far
+- snow had help from local vicar (whitehead), who was great networker and helped him get information
+- whitehead also was able to track down people who left and get information from them; he
+	found patient zero (girl who got sick and died first)
+- they had access to (open data) archives about deaths that include also reason and place produced
+	by city
+- the long zoom; snow was looking at problem from bacterial level to macro city level (build maps
+	of water distribution in London); important to be able to see data at different resolutions
+- the geo-web:
+	- local expertise on the ground (local bloggers that know their neighborhoods better than
+		outsiders; parents can tell you better how good a school is than school itself)
+	- open information standards
+	- new visualization and mapping tools
+- we are getting standardized geographic address for web (important for reliable addressing
+	of geo information); needed to build interfaces for spaces
+- outside.in (his company)
+- we organize world spacially; things closer are more important than those farther
+- they try to make it easier for people to create maps like snow did
+- outside.in radar gives you a radar to zoom at what is happening at a given location
+- the interesting part is not necessarily where the person who generates data is, but where
+	the data points to (e.g. looking for a restaurant in certain city when you're not actually
+	there)
+- finding local business is important, but we focus on them too much; they represent vanishingly
+	small part of our personal geo-world
+- lots of information that are relevant to us when they happen close are not important enough in
+	general to be published in local papers or TV news
+- irene jacobs wrote about eyes on the street; people watching what is happening which provides
+	more security
+
+
+Playing the Web:
+- how do they do it:
+	- controlled systems:
+		- bits designers can actually controlled
+		- dangle carrot infront of people's eyes (ask people to give more to get something)
+		- openness (feeling of able to go anywhere and do anything in modern games)
+			- create a funnel that is wide enough to feel open, but narrow enough to keep
+				you going towards goal
+	- enabling systems:
+		- community (managers) - community build around games are built around a property,
+			around something everyone rallies around
+		-  out of community comes social value; output that is completely separate from
+			game (or whatever original creators envisioned)
+	- psychological systems:
+		- relationships between avatars; everything is personizable
+		- you can do the same thing these days on web as well (myspace)
+		- the idea of collecting stuff; could be a part of that funnel, but too much
+			emphasis; point is in challenging yourself
+		- works often because gamers make games (for other gamers); use what you create
+- the challenge:
+	- talk to them, work with them (with game designers)
+
+
+Leverage Cognitive Bias in Social Design (rationality be damned):
+- when we work on limited information, we use strategies to figure out choices
+- bandwagon effect: people act and believe things other people around do
+- heuristics:
+	- uncertainty > gather all information necessary for rational judgment > make decision
+	- heuristics is a shortcut that skips second step
+- heuristics have cognitive bias and inconsistencies
+- biases:
+	- lake wobegon effect
+	- self-serving bias
+	- optimism bias
+	- not invented here
+	- hindsight bias
+	- prediction bias (all of them on tina's pic)
+- 1974: people do not make fully rational decisions, they use rules of thumb (heuristics) instead
+- use that at designing
+- representation bias:
+	- as the amount of detail in scenario increases, its probability only decreases
+	- leveraging: people assume that examples are representative of the group (e.g. on product review pages)
+		- check tina's pic
+	- yelp shows sample user by picking users that show desired behavior to signal to others what
+		they should do
+- loss aversion (losses loom larger than gains); win or loss 100 pounds is same riskiness as
+	win 300 and lose 100, but people prefer later
+	- if we frame stuff in terms of loss (check netvibes are you a user), it makes users feel
+		more compelled to actions to prevent loss
+- (checkout without an account improves conversoin by 20%; but you can frame creating account as
+	an immediate loss that might help creation of accounts)
+- ownership bias: we value things more when we feel a sense of ownership
+	- examples: YOUtube, MYspace, MYhotel; flickr littered with YOUs
+	- the sign-up problem: people tend to overvalue the software they currently use by a factor of 3,
+		makers overvalue what they offer by factor of 3 => 9x effect (eager sellers, stony buyers)
+	- things we can do:
+		- engage users instantly to make something
+		- check freshbooks for designing a signup page
+
+
+Designing for Interaction:
+- challenges:
+	- getting people to participate
+	- getting people to participate positively
+	- to build interfaces that work for very heterogenous community
+- encourage people to participate:
+	- increase benefit (go beyond altruistic motivations) to people
+	- reduce the barrier to entry (simplify registration; like showing registration window
+		at the point where being registered is needed; you can login with existing accounts
+		elsewhere)
+		- if you use other accounts to registration, then you can skip confirmation emails
+	- dip a toe in the water (get going quickly and invested quickly)
+		- check geni's home page for this
+- encourage positive participation
+	- personal profiles (encourage trust and connections)
+	- focus on tensions points (copy and design can go a long way)
+		- if a piece of site is a point of conflict; copy can take out a lot potential
+			animosity
+	- avoid negative competition (king of the hill contests don't scale)
+- allow for flexible participation
+	- adapt for different data
+	- enter silly data to see if site breaks
+	- follow trails (don't be afraid to adapt to your users)
+
+
+Social Network Portability:
+- signup and reenter data problem (SN fatique)
+- changing existing data (job change, new picture...)
+- goal: user control over data
+- data portability + url stability = data syndicatability
+- new SN should import/subscribe:
+	- your profile information
+	- your friends list and relationships
+	- from any existing profile of yourself
+	- portability enables syndication enables subscription
+	- = "social internetwork"
+- goal: easier for sites (= more adoption):
+	- accessible to web designers (not just developers)
+	- use modern web design practicies (e.g. POSH)
+	- incremental results for incremental effort
+	- modular solutions - building block (not "all in one")
+	- make it easy for current sites:
+		- work with current URLS
+		- work with current content (don't require duplication)
+		- also helps reliability per the DRY principle
+- don't consolidate users by emails!! (exposing private data)
+- don't publish a unique hash!! (same reason)
+- hashes can be used to auto-consolidate
+
+
+Designing for the Coral Reef:
+- (btw, search for nokia barcode reader)
+- dopplr cognitive bias: not invented here (yay!)
+- for the world to be interesting, you have to manipulate it all the time
+- wanted to act like a catalyst, to make things happen more quickly
+- your service is a finite state machine performing on your users :)
+- lots of places on dopplr where they show data from other sites (how to avoid
+	loading screen):
+	- show pieces where you'll go before you leave the site
+- designing a distributed, interwoven identity:
+	- because details are so hard to get right, they are hard to replicate
+	- details (execution) matter, not ideas
+	- delighter: adding something that creates joy (find rubber ducks :))
+- sync connections don't work, because they can be really slow
+- try apache activemq or something similar
+- they are publishing some of their code on github
+- dopplr added groups
+- avoid loading emotion (friendship) into interfaces; talk humanely about information
+	relationships, but not emotionally
+- social software = software that's better because there are people there
+
+
+The System of the World:
+- I give up. You can't transcript this :)

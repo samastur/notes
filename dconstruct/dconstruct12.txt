@@ -1,0 +1,101 @@
+dConstruct 2012
+===============
+
+Ben Hammersley, The Flower, the Field, and the Stack
+----------------------------------------------------
+- we have to fight for beauty, not only to understand it, but also to make it beautiful in the first place
+- are we, like Michaelangelo said only removing parts to reveal an inner beauty?
+- we are not really thinking about how to make higher levels (use of twitter and also not use of it, how people are touched by it) beautiful
+- what does media do to our children (repeated, constant concern)? we tend to deny them, but at the same time we talk about gamification and social networking and connectivity; we talk about attention
+- on one hand we deny, but we also embrace the potential of tech to have a social effect
+- we have to then come to terms to the fact that stuff we make for little screens actually change the world in some way
+- so then how do we as community decide what to do? what values, messages do we put out as practitioners?
+- things are changing so fast that some people, usually politicans and business leaders, have trouble keeping up
+- we trusted our future to people who are confused by understanding our present
+- we discovered on web that we are not randians, what we did is a communal affair; we feed off each other
+- let's make our world more interconnected, more compassionate, more understanding, more human
+
+Jenn Lukas, Cure for the Common Code
+------------------------------------
+- why haven't you learned what you would want to learn if you could?
+- different problems: knowing where to start is daunting...
+- breaks to formula: need help, resource, date, time and monetary value
+- Girl Develop It - acros many cities now to help women learn coding in environment more friendly (less male)
+- LOTS of sites that teach you coding (codingacademy...)
+- we need problem based learning (you pose a problem to motivate students and look at tools to solve it)
+- create a suportive environment for learning to give people confidence for learning
+
+Scott Jenson, Beyond Mobile: Making Sense of a Post-PC World
+------------------------------------------------------------
+- default thinking: we apply new tech to what we did yesterday (radio plays on television)
+- McLuhan: we look at the present through a rearview mirror: we march backwards into the future
+- perspective is worth 80 IQ points (Alan Kay)
+- apps are old school technology
+- trends:
+  1. app glut (everybody wants app; do we really want this on our phones; we are gardening our phones)
+    (users are becoming a bottleneck because they are managing everything)
+    - value > pain (needed to be successful); you CAN work on EITHER/BOTH so maybe you have to focus on
+      reducing pain => triumph of the mundane
+  2. size and cost reduction
+  3. Devices leverage other platforms (nest termostat)
+    - devices simpler and they offload some of that to other devices
+- just-in-time interaction (interacting with evironment without having to install apps...); would be nice
+  to react to environment when you're there
+- what is our model crisis?
+  - current model about software: buy, install and reuse
+  - new model based on experience: discover, use and forget
+- the problem: 'browser ghetto' (OS inside of OS)
+- url bar became our command line (awesome bar and chrome equivalent)
+- need discovery service: finding nearby devices with which you can interact
+- basically QR codes without the bother;
+
+Ariel Waldman, The Hacker's Guide to the Galaxy
+-----------------------------------------------
+- at the heart of anything good there should be a kernel of something undefinable (and if you can defin it, or claim to be ble to define it, then you kind of missed the point -- john peel)
+- we are the etc. of the universe
+- 95% of everything is invisible; 95% of everything is weak interaction design
+- hackers created particle windchime, which was visualisation using sound and is now used at CERN for diagnostics
+- planet hunters: project/site for looking at kepler data and looking for exoplanets and they have already detected a few
+
+Seb Lee-Delisle, Pixels, Play and People
+----------------------------------------
+- lots of crazy projects
+
+Lauren Beukes, Imagined Futures
+-------------------------------
+- those who can't imagine the future are doomed to fuck it up
+- when imagining future you obviously have to consider the past, but it's also about running away with an idea
+- universe is made out of stories not atoms (some poet), and we determine what we will make of them
+
+Jason Scott, The Save Button Ruined Everything: Backing Up Our Digital Heritage
+-------------------------------------------------------------------------------
+- 1884 antipiracy ad for corn harvesters
+- textfiles.com guy
+- archive team is trying to save as much data as possible when companies close old sites like geocities
+- if you take people stuff, you should ALWAYS make it possible for them to get their data
+
+Tom Armitage, Making Friends: On Toys and Toy Making
+----------------------------------------------------
+1. toys as simulation: SimX games should be ToyX games because they are bad simulations, but good toys,
+  because they make experimenting and changes, learning nice and fun
+- doesn't implement stuff he doesn't want to explore!
+2. toys as exploration of craft
+- old miniatures
+- utility is not the same as purpose; toys might not have a utility, but they do have a purpose
+- we expose purpose and meaning through making
+3. toyetics (coined by Gary Penn)
+- seamful design (search for it)
+- toys are incomplete without people and change when people start to interact with them
+4. toys are finished
+- seams are not rough edges
+- don't leave cables dangling; good toy has a dense quality to it
+- they are not prototypes
+When you are building a toy, you have to imagine a player, think like that person. That's the big value of toys. The opposite of play is not work, it's obey (Joan Erikson).
+making is playing
+problem solving is converging on problem; toymaking is going from idea in directions
+
+James Burke, Admiral Shovel and the Toilet Roll
+-----------------------------------------------
+- amazingly amusing talk
+- rene descartes is guilty of everything but certainly on how we think
+- working on project to teach young how to think inter-disciplinary

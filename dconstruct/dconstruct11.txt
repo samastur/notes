@@ -1,0 +1,134 @@
+Don Norman, Emotional Design for the World of Objects
+-----------------------------------------------------
+- scrolling: either you move text up, or window through which you look down =>
+	two models of work (nobody owns up to decision on how to do it ;))
+- no undo or discoverability on our new gestures systems; basically no feedback
+- you can't be just web devel, or product devel, because experience moves across
+	different devices and people expect the same experience
+- we have to think of systems instead of single applications
+- experience is important, but more important is memory, because it lasts longer
+	=> so memory of experience is more important and you should design that
+- we need to do with our apps is telling stories
+- what makes good movie/story wonderful is not that every scene is great, but a good
+	story and there is progress...story goes up and down => don't overload experience
+	- because the greatest happiness comes after something bad
+- hence as designers we need to think about time and experience through time
+- you want to be challenged and fail, because it makes success more pleasurable
+	(look at angry birds; you mostly fail and it's no intellectually challenging)
+	- you fail at angry birds, but feel like you could succeed, so you try again and
+	it's addictive
+- the future is not completely in our hands, since other people build things like devices...
+- cheaper 3D printing will change manufacturing of devices since more people will be doing
+	it
+- the most powerful tools won't be those we develop; but those our users will when given
+	power to do so
+- intention economy: will we design for what you intend to do in the future? (exciting and
+	frightening)
+
+Kelly Goto, Beyond Usability: Mapping Emotion to Experience
+-----------------------------------------------------------
+- we attach to devices because we attach memories to them
+- think about spaces between experiences you're creating
+- connections are experiences
+- companies want addictive experiences (get request at least once a month)
+	- you can't really create addiction; but you can understand rituals
+- you can design experience that fit in seamlessly with rituals
+	( functionality -> usability -> ritual)
+	- important to understand them
+- beautiful things tend to function better (Don Norman)
+- it was found that surrounding context completely dominated the emotional 
+	driving experience (mood you're in affects what your experience is)
+- branding important because it will predispose people's reaction and experience with
+	what you're creating (much better if they've been exposed to you)
+- understanding how people live is necessary to get emotional side of value
+- CHECK Kansei engineering
+
+Bryan & Stephanie Rieger, Letting Go
+------------------------------------
+- for much of human history we have been on a quest for perfection + control
+- this is about design in age of disruption
+- the balance of power is shifting; we can no longer expect customers to interact
+	with our creations in a linear, exclusive or predictable manner
+- users will change experience and continue it after the end of what we built
+- marketers: product "arrived" at society at about 50 million users
+- the best design will set the stage, but stop short of fully defining the experience
+
+Craig Mod, What is the Shape of the Future Book?
+------------------------------------------------
+- three constant design tasks: tame unfiltered data, produce quiet data (kindle: you experience
+	content wholly) and corral data
+- great design is born from nourishing habits
+- "the more one was lost in unfamiliar quarters of distant cities, the more one understood the other
+	cities he had crossed to arrive there"
+
+Frank Chimero, Oh God, It's Full of Stars
+-----------------------------------------
+- digital has presence, but not well defined (phantom pile); it still weighs (us) a bit
+- digital stuff that we collect has potential - we mostly don't know what we can use it for,
+	just have a feeling that we might
+- commonplace book (learned people used to copy passages that they liked from books they read; kind of like
+	tumblr of its day)
+- by keeping an account of your readings, you made a book of your own, one stamped with your personality
+	(robert parnton)
+- => curation is authorship
+- paul saffo: entering a third age when someone both produces and consumes in the same act
+- missing 1 thing in commonplace book: architecture of serendipity
+- finding and collecting is nice, but arrangement is what really adds value and we don't do it
+	often (it requires 2nd pass)
+- optimizing for 2nd pass (need to change 3 or our big decisions):
+	- how we sort (so far: LATCH - find abbr)
+		- tinker with arrangements of things so we can see "new" old things
+	- how we move through time (instapaper pushes things to future)
+		- CHECK photojojo.com
+	- what media is supported (we need to be multimedia about this)
+		- biblion ipad app best example of this (from ny library)
+
+Dan Hon, Storytelling, Play and Code
+------------------------------------
+- some platforms let people mess around a bit (play) and some don't
+- to make art with technology, one does not use it as a tool; one must understand it as a material.
+	technology is not always a tool, an engineering substance... (tom armitage)
+- platforms that make it easier to publish and play: heello, youtube, twitter, tumblr, wordpress
+	- xtranormal site for easy making of cgi movies
+- hard platforms for telling stories: facebook, google+
+- none of these feel like stacks; none of them look like places where you can discover
+	- we don't have authoring tools either (e.g. for telling multi-character story over a
+		streambased media like twitter)
+- what we lost when we started digitizing things; everything looks kind of same (websites...) and difference
+	comes down to icon design
+- this is not a metadata problem; it's a design/content/code problem
+
+Kars Alfrink, The Transformers
+------------------------------
+- new ideas must use old buildings (jane jacobs)
+- baarle-nassau/baarle-hertog = city that makes east/west berlin look normal (different parts in different
+	countries)
+- chine mieville: the city & the city (book) = fiction inspired by places like baarle
+- the big question: how can we make society more resilient?
+	(uk riots broke rules like you don't loot in your own neighborhood)
+- problem with gamification is that it focuses on rewards instead of rules
+- better way to use games to test new ideas (to see what sticks)
+- need to counteract filter bubble (to hang with only like-minded people)
+	- games as meeting place (chess in the park)
+	- should be part of everyday life, everyday routine
+- problem with urban games is that they don't scale (typically event based and costly to organize)
+- bookcrossing.com (rules as memes)
+- game Nomic (simplification of legal system, where games is making rules for game that once adopted need to
+	be immediately followed)
+
+Matthew Sheret, Pocket Scale
+----------------------------
+- trains: moving through space needs standardized time (time-space influence)
+	- pocket watch is the first instance of people dealing with change brought by
+		trains, telegraphs...new networks
+- people SEE "THROUGH" each device to the SERVICE it represents (Mike Kuniavsky)
+- totems = objects to remind people in dream state of realities real form
+- oyster becomes an avatar of me, even though it's a simple chip; at last.fm they use
+	oyster card to recognize person and to select radio station for him
+- toys with rfid that trigger a selected movie; toys can become a multi-sensory
+	experience
+
+Kevin Slavin, Reality is Plenty
+-------------------------------
+- the fallacy of augmented reality is that eye not the brain is where things actually happen
+- tamagotchi became real by behaving real; it's not how the thing looks that matters, it's what it does

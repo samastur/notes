@@ -1,0 +1,97 @@
+dConstruct10
+============
+
+Marty Neumeier, The Designful Company
+-------------------------------------
+- a designer is anyone who devises ways to change existing situations into preferred ones
+- finding good choices is difficult, but deciding is easier (not the other way around)
+- customers now want free, perfect, now (and not just two of cheap, good, fast)
+- real competition comes from clutter, not other companies
+	-types: product, feature, advertising, message, media
+- a wealth of information builds a poverty of attention
+	- harder to change mind, because we don't want to deal with it after we decided which
+		brand represents something (e.g. iphone a smartphone)
+- a brand is a person's gut feeling about a product, service or organization
+- you have to be really different to be considered as a definition of something
+	(otherwise you are just a me too brand)
+- analytical tools don't work when judging radical ideas
+- intuitive tool (you need to be good and different)
+	- does poorly in tests
+	- goes to market with difficulty
+	- customers soon equate different with good
+
+Brendan Dawes: Boil, Simmer, Reduce
+-----------------------------------
+- you have to collect as much stuff for inspiration as possible to get something good out
+- simmer: play with things without considering if it can be done
+	- should play more than we are; nobody will die
+- we should put more of a thing that isn't noticed until it gets noticed (iphone scroll to top
+	bounces and shows you there is nothing more up there)
+- ponoko.com (create stuff on order)
+
+David McCandless: Information is Beautiful
+------------------------------------------
+- TED Talk is more or less same as this talk
+- data is a new soil
+- play (more) with data, to find meaning and good representation
+- what works: integrity, form, function and interestingness combined
+- friends of getting idea: boredom, ignorance, bewilderment and frustration
+	(signs that something is missing)
+- @infobeautiful
+
+Samantha Warren: The Power & Beauty of Typography
+-------------------------------------------------
+- true, but not much new
+
+John Gruber: The Auteur Theory of Design
+----------------------------------------
+- thesis: the quality of any collaborative creative endeavor tends to approach to
+	the level of taste of whoever has control
+
+Hannah Donovan: Jam Session: What Improvisation Can Teach Us About Design
+-------------------------------------------------------------------------
+- improvisation is a performance in the moment; a response to your immediate environment
+- you do it with other people most of the time
+- improvisation is shutting down self-censoring parts of brain and enhance self-expression parts
+- to do well:
+	- you need to be comfortable with tools you use (whatever they are)
+	- structure & framework - you need to define some rules ahead of time that are
+		respected and an overarching framework of what needs to be achieved
+		(e.g. set of use cases...)
+	- roles - each has its role and it pays to be very picky who yo work with
+	- communication & expression - often marks we put on screen are most effective
+		means of communication, not words (that's why prototyping etc. are so important)
+	- trading parts - design equivalent is layer tennis (learn about how other people think)
+- why
+	- create new thought patterns, new structures, new ways to act...
+	- improvisation has been at the heart of every popular music movement
+- improvisation is key to creation of culture (read-write culture by lessig)
+	- real-time web was needed for true improvisation
+
+James Bridle: The Value of Ruins
+--------------------------------
+- the whole internet is in one shipping container (internet archive) - easy to steal
+- we lost knowledge before (library of alexandria)
+- wiki racing (who comes first to destination page from random page)
+- everything should have a history button; we should always be able to look back
+- @stml shorttermmemoryloss.com
+
+Tom Coates: Everything The Network Touches
+------------------------------------------
+- with adding open data to web the range of things we can build is rising exponentially
+- upgrades to the web of data:
+	- social software
+	- social networks
+	- geolocation
+	- real-time data
+	- data visualisation
+- the network extends to objects
+- spimes (devices that give out location and ownership; redefines ownership, because you don't
+	have to have it at home if you know where it is) and objects as service (renting washing machine)
+- mujicomp (matt jones)
+- weight uploading; more sites that could have access to it, more reason for weighting yourself
+- sfpark.org (optimizing parking space by changing prices according to usage)
+
+Merlin Mann: Kerning, Orgasms & Those Goddamned Japanese Toothpicks
+-------------------------------------------------------------------
+- important to figure out what to be nerdy about next (so you don't get obsolete)

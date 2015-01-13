@@ -1,0 +1,166 @@
+Adam Greenfield: Elements of Network Urbanism
+=============================================
+- ubiquitous computing seems like future after web
+- networked urbanism = architecture, city and ucomputing?
+- by the end of 2008 more than half the world's human population lived in cities
+	=> when you consider humanity condition and impact on it, you have to consider urban context
+`- more of a post-urban condition: slams, favelas are prevalent, not a new york city like places
+- imagine that technology layered over such places, not modern (west) cities
+- Gartner: by the end of 2012 networked sensors will account for 20% of non-video Internet traffic
+	=> a very significant % of bits travelling primarily won't be a consequence of direct human action
+- 1. transition: component -> resource
+	- ipv6 is large enough that EVERYTHING can be addressable, potentially queryable and hence even scriptable
+	 (a new set of eyes of querying state of components and act (up)on it)
+- 2. transition: constant -> variable
+	- nothing need be static/constant anymore; you can imagine a world of dynamic response to
+		conditions elsewhere (streets that change direction in response to traffic in other parts of town)
+- 3. transition: latent -> explicit
+	- Everyblock collects local reports (police, health, fire...) and maps over city; this was always
+		generated, but it was latent, hard to get out
+	- you don't necessarily want to know all that information (can be scary); maybe it's better to live
+		in kind of fog about it
+- 4. transition: browse -> search
+	- instead of encountering things at random, as you happen on them, you can do reach and find
+		them (give me a restaurant in walking distance that doesn't have a line outside)
+	- changes what it means to be enlightened, informed user of a city when you have a search
+		organism that is radically democratized
+- 5. transition: held -> shared
+	- sharing information makes more sense now and you can contribute to world in an important, rich way
+- 6. transition: expiring -> persistent
+	- knowledge does eventually leave the world, but might not anymore if network will catch
+		information (facts will remain)
+	- one reason why big cities exist is a chance to start over with a blank slate; won't be so easy anymore
+	- difficult to carry multiple masks
+- 7. transition: deferred -> real-time
+	- things get closer to real-time; to get conditions on real-time traffic data etc.
+- 8. transition: passive -> interactive
+	- becoming cocreators of a place from passive participants
+	- everything we do has consequences that can change things for others (think queues)
+- 9. transition: wayfinding -> wayshowing
+	- used to be that cities were designed in a way to help you orient yourself (signage, maps,...)
+	- if you have a device like sat-nav, that can get you from A to B step by step, then you begin
+		to show your way around the world instead of find
+	- great if you are stranger in a place, but McLuhan (preveri kako se napise) said every extension is also an amputation
+	- what happens when technology fails, if that's everything you ever known
+- 10. transition: object -> service
+	- should be a talk in itself
+	- city car share (zipcar, local bicycling schemes); cars mostly sit in parking lot, but this is changing when
+		you can lease access and is more efficient; it's not an object anymore, it becomes a service
+- 11. transition: vehicle -> mobility
+	- when planning a route through space, don't think of as much about particular type of vehicle
+- 12. transition: ownership -> use
+	- Spotify: has all music and just set up a playlist; don't own the music itself
+	- maybe I don't need to own things locally to make maximum use of them
+	- maybe things might get closer to peak optimum use
+	- he thinks we are moving out of consumerisms to something that isn't born yet, but is based on different
+		economic assumptions
+- 13. transition: schelling -> schoaling
+	- clock in grand central used to be a schelling point -> where people meet when agree on meeting ahead of time (presernov trg)
+	- you don't need that anymore: I'm here at <somewhere>, meet me <here>; converging on a vector of intention of be
+- 14. transition: community -> network
+	- neighbourhoods exists on a delicate balance of knowledge of people around you
+		- small amounts of information is actually optimum for living together
+		- building added a discussion board and in couple of months it broke building community
+	- cities don't work like social networks; you encounter an other, somebody different and it is where
+		interesting things happen; on SN you connect yourself to somebody that you have some sort of afinity
+	- problem because it begings to homogenize city and might look a lot like suburbs
+	- we should maintain for purely functional reasons some aspects of previous world
+- 15. transition: consumer -> constituent
+	- in every political sense have an opportunity to become cocreators, constituents of society, if we
+		design it properly (that is different from city to city, country to country)
+	- it's not likely to come out of technology secto\
+
+
+Michael Migurski, Ben Cerveny: Let's See What We Can See/Everybody Online And Looking Good
+==========================================================================================
+- fascinating, but not transcriptable
+- use lots of geographic approaches to presenting lots of data (google maps inspirations)
+- physics of information: rules to map to dynamic representations (are coherent and rules
+	become internalized; e.g. people are now familiar with google maps way of using maps-like
+	data)
+- sculpture in possiblity space
+	- lots of different variables that need to be brought down to something that can be represented
+		in lower-D space (timelines, size of circles...)
+- tuning in patterns
+	- allow users to tune in patterns (like commute or nightlife timeframes when displaying crime in city)
+		check http://oakland.crime-spotting.org
+- dimensional synesthesia (condition where you like hear a sound and can smell a certain scent)
+	- like dynamic representations of audio
+
+
+Brian Fling: What's Next? How mobile is changing design
+=======================================================
+- generation Z: born in the modern digital age. technology is infused at birth
+	(iphone to them is what macintosh was to us)
+	- they solve them problems using SN and make buying decisions collectively
+- in less than five years, y+z generations might have more buying power than rest (??)
+- is HTML5, CSS3, Javascript, XML and APIs the universal language of everything we'll describe?
+- how mobile is changing design?
+	- tweetie based desktop app on their mobile app (design first for more constrained environment?)
+- do we design for medium or the context?
+	- mobile design is about context
+- the era of single context web is over; we have to think of design as a multi-faceted experience
+
+
+Nathan Shedroff, Chris Noessel: Learning From Sci-Fi Interfaces
+===============================================================
+http://www.nathan.com/thoughts/MakeItSo.pdf (talk)
+- scifi influences design in 3 ways:
+	- expectation (setting it)
+	- social context
+	- proposed paradigm (wouldn't it be cool, if...)
+- Expectation:
+	- X-men pin display inspired army tool for creating 3D models of topography
+	- sometimes expectations are difficult to let go (humanoid robots)
+- Setting social context and responding to it
+	- antropomorfizem (MS Bob, Clippy...) => tricky
+	- sound is enough (easy to slap visualizations on, but difficult to do well because it raises expectations)
+		- r2-d2 is endearing even without humanoid characteristics (doesn't look like or talk)
+	- behavior can be enough (one-click at Amazon; knows enough about you to trust)
+- Proposed paradigm influences us in 4 ways:
+	- reminds us what we already know
+	- inputs should know effective states of its users (mashing buttons is not a normal behavior)
+	- showing us in new technology that we can use in current work (e.g. holography and size; more important being bigger)
+	- intentional modality in gestrural interfaces (if actions have meaning, how do you deal with actions
+		that shouldn't have meaning)
+- it takes about 30 years for interfaces to move from sci-fi to mainstream
+- not everything that works for movie audience works in real life (tom cruise arms got tired when filming
+	minority report)
+
+
+Robin Hunicke: Loving Your Player with Juicy Feedback
+=====================================================
+- defining juicy:
+	- tactile
+	- inviting
+	- repeatable
+	- real-time
+	- emergent
+	- coherent
+	- small
+	- delicate
+	- fresh
+
+
+August de los Reyes: Experience and the Emotion Commotion
+=========================================================
+- a whole new mind (pink) book => check it
+	- the more choices we have, less rational are we about making them
+- shift to experience economy (value experience over things)
+- what is rule of products? or objects?
+- m.minsky says emotional thought and rational thought are same (book: emotional machine)
+- what are emotions?
+	- look at james-lange theory => suggests it is a label we apply after we experience something
+	- our autonomic nervous system are monitoring environement and elicits response to inputs (adrenaline
+		shoots up...)
+	- same physical stimulus can draw different conclusions (depending on context)
+- system output > user input = magic
+- august@surface.com
+
+
+Russel Davies: Dematerialising A Web of Data
+============================================
+- we are getting real objects with digital identities
+- also digital stuff being expressed in physical things
+- we are moving past digital infatuation and analogue nostalgia
+- The Nature of Technology by W.Brian Arthur (check book)
