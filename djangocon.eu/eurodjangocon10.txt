@@ -1,0 +1,482 @@
+Slides: http://djangode.pbworks.com/Slides
+
+Day 1
+=====
+
+Jacob Kaplan-Moss, Keynote
+--------------------------
+- somewhere around half a million users use django based on uniques on djangoproject docs
+- what now after success?
+	- user community growth is outpacing developer community growth
+	- we take ourselves too seriously
+- we should strive to be modest
+
+Armin Ronacher, The Future of WSGI and Python 3
+-----------------------------------------------
+- py3 has many bugs, mainly dealing with unicode
+	- that causes problems for wsgi
+- wsgi is slightly flawed (hard to use generators; input stream not delimited; read()/readline() issue; path info not url encoded)
+- wsgi is subset of http; not in wsgi:
+	- trailers
+	- can't have hop-by-hop headers
+	- chunked responses
+- http spec says all headers should be iso8859-1, but in practice most cookies are utf-8
+
+Alex Gaynor, Making Django and NoSQL Play Nice
+----------------------------------------------
+- NoSQL = any db that doesn't speak sql
+- playing nice doesn't mean importing lib and use it (which you can do today)
+	- needed so other parts can use it too (admin, forms, serializers...)
+- translating filter(), values() etc. into internal datastructures is lossy
+	(not in respect to db you use, but in respect to other dbs), which is not
+	a problem between sql dbs, but becomes with mixing nosql
+- query thinks in terms of sql
+	- it chooses between join types
+	- it generates table aliases
+	- it splits filters between HAVING and WHERE
+	- and probably some other stuff
+- possible solution: make query do less
+	- instead of generating two trees of WHERE and HAVING, generate a single tree of filters
+	- don't generate JOINS at all
+	- push that all down to the compiler
+http://www.slideshare.net/kingkilr/making-django-and-nosql-play-nice
+
+Sean O'Connor, How to make running a user group feel like cheating
+------------------------------------------------------------------
+- user groups provide locality and physicality; kind of nice, meaningful and powerful thing for open source
+- provides idea sharing
+- kiss
+	- invest in what to do based on feedback
+- think about what your audience will be (what's your group's focus)
+	- has to be sustainable (2 not worth effort, 5k is a job)
+	- population density is going to influence greatly scope of your group
+	- experiment - go to other groups and test interest; general enough name leaves you space in which to experiment
+- bars/restaurants work well for social events
+	- talk to venue before showing up if there are more than just a few of you
+	- stick to schedule
+- sponsors: look for service in kind (things not money like buy pizza...)
+	- avoid dealing with money (rarely worth it)
+- meetup.com is a great tool for running user groups
+- don't leave people waiting (reply quickly to emails)
+- follow through (if you say you will do something, do it - kills relationships otherwise)
+- tutorials and hack nights take little to set up, but are immensely beneficial/have great impact
+
+Honza Kral, Testing Django Applications
+---------------------------------------
+- unit test test just one piece of code, integration tests test how components work together
+- testability (how to write testable code)
+	- avoid side effects
+	- separate components
+	- only accept parameters you need (request is bad)
+	- be smart about transactions and models
+	- don't put business logic into views (use models)
+		- not just models in django sense; probably modules
+- class-based views FTW
+	- every block of codes that uses few variables you abstract into separate method
+	- you can now test individual methods
+	- define __call__ on class that calls those methods as needed
+- test steps in their right order and continue from where previous one ended
+- testing models
+	- try to avoid db (it will save you huge amount of time); saves are pricey
+		- avoid referencing private key and things like that when possible
+	- fixtures only work for static data
+		- they also make you lazy by starting to rely on them
+	- natural keys FTW!
+	- use factories when fixtures aren't enough
+- testing forms is simply supplying dict and seeing if it validates or not
+- never let your test suite break!
+- fast test or a way to run just part of the suite
+- you need to know what went wrong:
+	- no doctests
+	- descriptive test names
+	- short tests touching minimal amount of code
+	- make sure tests work (test with and without code)
+
+Jirka Schaefer, Django at the enterprise
+----------------------------------------
+- don't mention django/python as long as you can
+- compare with java stuff to get buy-in (whole process is highly political)
+
+Will Hardy, Free the Developers
+-------------------------------
+- case for domain specific frameworks for other django developers
+	- they are not reusable apps
+- sharing with framework means wider audience can use it because of wider point of view
+- build things that are less prescriptive, more descriptive
+- downsides:
+	- is that you are not really coding for now
+	- more effort
+- design approaches
+	- think about role your framework is actually going to play (influences which features will it need)
+		- smaller frameworks are easier to test and can easier do what they do well
+	- identify your opinions and assumptions (like does everything have a title or image?)
+- technical approaches
+	- generic relations
+	- model subclassing
+	- signals
+	- managing class/function (example django admin)
+- nontechnical approaches
+	- documentation (not for functions that nobody will ever think about)
+
+
+Day 2
+=====
+
+Jan Lehnardt
+------------
+- 70's research by A. Kay: kids have attention span for programming of a 1-2 page of code
+- more code means more bugs; more you write, worse the ratio between code and bugs gets =>
+	less code even more important
+
+Benoit Chesneau, Gunicorn, Django and WSGI
+------------------------------------------
+- gunicorn is a wsgi http server
+- check image for os tuning
+
+Patrick Lauber, Introduction to django-cms
+------------------------------------------
+- demo; looks a bit geeky
+- has support for approved publishing, i18n
+- support front-editing
+- fairly flexible
+
+Russell Keith-Magee, No! Bad Pony! or, Explaining Django's development process
+------------------------------------------------------------------------------
+- what turns an idea into a bad pony? (non-starters)
+	- is just plain wrong
+	- is impractical
+	- isn't a good fit for Django's design
+	- takes the project in the wrong direction
+	- comes without an offer of assistance
+- ideas that are wrong
+	- ideas violates a standard or best practice
+	- idea can't be implemented
+	- rusty russell interface level too high (makes use too easy go wrong)
+	- idea violates DRY (not often envoked correctly)
+- impractical ideas
+	- a problem that doesn't exist (e.g. using ORM for db caching backend)
+	- changes the design contract
+	- addresses a small part of larger problem (e.g. not fixing bugs in old forms during devel of new forms)
+	- architecture astronauting
+		- practicality beats purity every time
+- design mismatch (fine in general, not fine in django)
+	- replace django's templates with Jinga
+	- replace ORM with SQLAlchemy
+	- replace test framework with Nose
+	- WE LIKE PARTS WE HAVE; batteries included is django's selling point (consistency is a feature)
+- ignores the philosophy
+	- add GROUP BY, HAVING to ORM (ORM is not SQL)
+	- add variables/callables to template language
+	- add Ajax to Forms (Django is a server side framework)
+- just add a setting...
+	- a setting is a decision deferred
+	- N settings, 2^N configurations
+	- doesn't mean we won't add settings
+- wrong direction (wrong for core, not wider django community)
+	- feature creep
+		- make developement server multithreaded (dj is not a webserver)
+		- add connection pooling
+		- add a backend... (ms-sql...)
+- the community
+	- the core doesn't have to do everything
+	- in fact - the core can't do everything
+	- the community has an essential role here
+	- blessing by core doesn't make code better
+- add X to contrib
+	- django-tagging, django-registration, django-debug-toolbar
+	- adding to contrib doesn't fix anything
+	- what is django.contrib?
+		- unofficial definition: a collection of optional, defacto standard implementations of common patterns
+		- goal is to be able to delete whole contrib and django still working
+- here's a big job... (but i'd like somebody else to do it ;))
+	- write more blog posts, have a weekly news summary... (they all take time and don't need core to do it)
+	- massive features
+		- schema evolution
+		- support for non-SQL data stores
+- how to get your pony
+	- won't work (putting on cc, nagging through blog, me too comments...)
+	- works:
+		- offer to help out
+		- better still - actually help out
+		- build up karma
+		- do the unglamorous stuff (triage tickets, django-users, patch feedback)
+	- don't just write code
+		- yes, code needs to be written
+		- it isn't just a matter of writing a patch (patch needs to come with docs and tests; no commit otherwise)
+		- you need to be an advocate
+		- best advocate is someone who is trusted
+- a matter of trust
+	- core team has limited resources
+	- we need to make best use of that time
+	- understand the core DVCS message:
+		- it's all about trust
+		- it's not about forking - it's about merging
+- if you must...
+	- do the research
+	- demonstrate you understand the problem
+	- implementation trumps idle discussion
+	- maximise utility for the core team
+
+Peter Bengtsson, Using MongoDB in your Django app
+-------------------------------------------------
+- mongodb is presumably faster than sql
+	- it is a document-oriented database; written in C++
+- features
+	- BSON (JSON+datetime)
+	- auto-sharding (july 2010; not in trunk yet), master/slave
+	- MapReduce
+	- document-oriented, not key/value
+	- replication acknowledgement
+	- DBRef (sort of foreign keys)
+- faster than CouchDB
+- implications
+	- no joins (you need to change the way you browse data)
+	- no transactions (change what your views do; to do less)
+	- supports polymorphism (inheritance of structure; you can work with it at any level)
+	- IDs are not integers (hashed IDs; includes timestamp so easier merging)
+- use pymongo (TxMongo - async variant based on Twisted)
+- "ORMs"
+	- Ming (SQLAlchemy like)
+	- MongoKit (pymongo like; use django-mongokit)
+	- django-nonrel (99% transparent, GSoC)
+	- django-mongodb (100% transparent, active?)
+	- MongoEngine (Django ORM like; works brilliantly with Django)
+- which one should I use?
+	- MongoEngine! :)
+		- a bit faster than mongokit
+		- least verbose
+		- automatic collection management (collection = table; derives from class name like django)
+		- django-mongoforms
+		- automatic "query inheritance" (if you have multi-inheritance of docs, you can pick level you want)
+		- great documentation
+	- drawbacks
+		- doesn't have signals (django-mongokit has them)
+		- test database (mongokit has them)
+		- maturity? (applicable to all)
+- mongo db backend exists now; google for it
+
+Andrew Godwin, South, New and Old
+---------------------------------
+- a bit like VCS, but for db schemas
+- it doesn't magically support custom fields anymore; but prevents hideous migration failure because of it
+- multidb? non-relational? renames!
+	- not yet and probably will never support all scenarios of multi-db
+	- no real support for NoSQL dbs either
+- proposal for the future
+	- there will always be disagreements about approach
+	- split into two parts: core of south ideology and core db part (the difficult part to get right)
+	- keep ideological part and move the other part somewhere else as common ground
+
+Django Technical Design Panel
+-----------------------------
+- we should start python3k branch; core devels can't work on it, because they will have to support 2.x for a long
+	while so we need new blood, new specialists
+
+Lightning Talks
+---------------
+- Hudson used for continuous integration (check it out)
+
+
+Day 3
+=====
+
+Benoit Chesneau, Relax your project with CouchDB
+------------------------------------------------
+- couchdb developer, maintainer of CouchDBkit, Couchbeam, Couchapp, couchdbproxy...
+- why nosql
+	- we don't need "scalability" sometimes
+	- most dB size <300GB
+	- all my data could be on a machine
+	- often DB requests are fast enough
+
+	- you need to be agile
+		- different kinds of data (video, sound...)
+		- easy denormalisation
+		- migrate your data easily
+		- keep your data safe
+		- flexibility, simplicity
+- features
+	- oriented document database
+	- REST
+	- Map/Reduce (M/R)
+	- ...
+- document oriented
+	- schema-less
+	- JSON
+	- attachments
+- Map/Reduce
+	- map: collect a list of values associated to a key
+	- return a K-V list
+	- reduce: reduce a list of K-V in one list of values
+	- rereduce
+- m/r programmed with js
+- replication
+	- incremental (replicates just changes)
+	- master-master
+	- continued or when needed
+- more
+	- sharding: yes (solutions exist, not built in; easy to do because it's based on HTTP)
+	- couchdb-lunge, cloudant, yours
+	- geocouch, full r-tree
+- couchdbkit
+	- couchdb python framework; supports CouchDB 0.10.2 & 0.11.0
+	- simple client
+	- object document mapping ("ODM")
+	- django extension
+	- couchapp compatible
+	- has a neat loader for files from filesystem (sync with fs)
+- 0.5
+	- new mapping (objects with annotations)
+	- admin integration
+	- possibility to attach design doc to some objects
+	- multiDB & DB backend in extension
+	- eventlet support
+
+Maciej Pasternacki, Best of both worlds - deploying Django applications with Capistrano and Supervisord
+-------------------------------------------------------------------------------------------------------
+- capistrano
+	- featureful (fabric is more basic)
+	- mature and complete
+	- covers full workflow
+	- transactional and rollbacks
+- they deploy every release in its own, timestamped dir; current a symlink to the right dir
+- capistrano-offroad = open source pack of capistrano utils
+	- reset capistrano railsy defaults
+	- handful of utility functions
+	- django and supervisord recipes
+- upstream libraries (how to get them?)
+	- should be done release-wide, so if anything breaks you can rollback
+- supervisord (check it out)
+	- manages foreground processes
+	- easy to use locally
+	- easy to configure -- .ini file
+	- robust
+- scaling in cloud
+	- queuing to distribute work: django-sqs
+	- ec2 security groups to mark roles: capistrano-ec2group (?)
+
+Idan Gazit, Design for developers: Making your frontend suck less
+-----------------------------------------------------------------
+- django advent guy; designer
+- design should be one of things developers know a little bit about
+- sucking less is the goal; one way is to do less
+	- less opportunities to suck
+- solid color for bg works fine; use fewer things
+- make your content easy to scan and parse
+- 1.3em line height  :) 16px is good font size
+- column width: 2 alphabets
+- colourlovers.com, kuler.adobe.com (can be used to find schemes that might work)
+- go monochromatic if you don't know what to do
+- breaking rules can emphasize things, but be careful and don't break too many
+
+Michael P. Jung, Efficient Django Hosting for the Masses
+--------------------------------------------------------
+- pyrox.eu
+	- providing fully replicated python hosting for a reasonable amount of money
+- mass hosting (many websites from different users sharing resources)
+	- ssh access is crucial
+	- provide access to scm tools: git, hg, svn, bzr
+	- don't dumben down stuff (one click django install)
+- basic parts
+	- webserver
+	- cache
+	- appserver (wsgi)
+	- filesystem
+	- database
+- perfect WSGI
+	- support threads and couroutines alike
+	- sub-interpreters
+	- low memory usage, simple configuration...
+- threads better today, because couroutines don't have wide enough support (especially in db clients)
+- check image for wsgi container comparison
+
+NoSQL Panel
+-----------
+- never gonna happen that you could transparently switch between nosql dbs (jacob)
+- nosql guys expect some common ground to emerge on top of a subset sql
+- subset seems to be get by prim. key or get a list, which are in general most common ops
+	so django support could be useful
+- GSoC = students work on open-source, but they are not allowed to collaborate with others (wtf?)
+
+Joerg Kress, Red Square -- Driving Innovation at BMW with Django
+----------------------------------------------------------------
+- anonymous social network for idea creation and refinement (internal bmw tool)
+- expanding to other systems because users like it
+
+Eric Holscher, Getting the most out of your test suite
+------------------------------------------------------
+- we need a standard python way to run tests
+- should be part of setuptools/distutils2
+- django has no support for this yet, but can lead standardization efforts
+- simple continuous integration server by titus brown; interesting part is client (look eric's github page): pony build
+- at least ship with a shell script that runs your tests (document how to run tests)
+- cont. integration fancy way of saying run tests every time you make commit
+	- without this your tests are useless
+- make sure your setup.py installs your package
+- for django using --noinput is your friend (doesn't ask for input so you can automate throwing away database)
+- use virtualenv so you can be sure your process works
+- watch Titus's Pycon talk
+- cont. integr. (CI) options:
+	- buildbot
+	- hudson (pretty great)
+	- devmason
+
+- hudson
+	- written in java
+	- great plugin community
+	- super simple to setup
+	- becoming defacto
+	- worthwhile if you have resources
+	- use at work and it kicks ass (better than buildbots ever did)
+- hudson.djangoproject.com (problems with underlying solaris)
+- setting up your own; has:
+	- coverage
+	- xml output
+	- can add pylint
+	- and profiling
+- coverage provided by Hudson Cobertura Plugin and Hudson Violations Plugin
+	- pip install coverate (will build C extension)
+- irc plugin useful for notifications
+- execute: coverage run manage.py test
+- Gareth Rushgrove's django-test-extensions has nifty stuff; there are others
+- pylint and profiling may not be something you want to run everytime, because it doubles the time (slow)
+- django-nose makes a lot of this easier
+
+-devmason
+	- worked on by Eric and Jacob
+	- agnostic reporting
+	- uses Piston
+	- devmason.com/docs
+	- integrates with Github and Bitbucket
+
+- monitoring & deployment
+	- django kong
+		- functional testing; uses twill (twill.idyll.org)
+		- devops thing
+		- github.com/ericholscher/django-kong
+		- tests are interpreted as django templates
+		- check to see if your code works live
+		- catches errors users are having but never reporting
+	- stuff to do:
+		- integrating with nagios
+		- "run levels"
+		- better aggregates timing data
+		- have tests live on disk/in VCS (instead of db)
+
+- run nightly automated tools to check your sites (use spider)
+	- patu on github (a simple spider)
+- get a dashboard
+- perl's cpan automatically collects test results for sw when you install it (if you opted in)
+	- we need this for python
+	- devmason can serve as the reporting platform
+- what you don't measure you don't improve
+- get some basic monitoring for your sites functionality
+
+Lightning talks
+---------------
+- mustache.github.com (pystache python version)
+- russell: we need ray's widget exchange; never will be part of django - exchange for django widgets
+	- empty package on bitbucket: django-rays
+- mock (lib for easily creating mocked objects that can be used in testing)
+- zest.release = tool for easier releasing of python packages
+- django gov group for django based opengov project developers

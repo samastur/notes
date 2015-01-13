@@ -1,0 +1,546 @@
+Day 1
+=====
+
+Check Reinout van Rees online: he makes awesome notes
+
+Opening - Remco Wendt
+---------------------
+- jutri stavkajo javni prevozi = noben javni prevoz ne dela
+- stranisca so v kleti, kosilo pa na istem nivoju
+
+From static to real-time: one app's journey into modern age
+-----------------------------------------------------------
+- long polling = opens request and wait for response (server respondes only when it
+	has new content); opens new request immediately after old one timeouts/returns
+- real-time endpoint is the only thing behaving differently than other Django requests
+- twisted deferreds again; but needs discipline
+- coroutines route taken, because it looked easier (looks like threads)
+- wrote a server that spawned coroutine on every request (eventlet based)
+- needed: communication between django and new server for communication about new uploads
+	=> here comes redis
+- restart of server makes it hammered => long poll hits nginx error page because
+	it's not there yet and ping-pong starts
+	- introduced increasing delay in long-poll to avoid this
+- sending multipart response message so it can send more than one batch of data
+	through one open request
+- this is basically reimplementing sockets over http - why not just use them?
+- websocket support right now sucks, but went for it
+	- finds out that nginx doesn't support this (keeping connections live from nginx
+		to endpoint)
+- when it worked, it worked great => he wanted to add more features
+- discovered one redis pubsub channel is not enough => switched for one channel for each
+	user
+- new problem: each feature needed two implementations (serverside and one for
+	client-side)
+- don't use websockets now, if you don't have to!
+- socket.io - started as js client and server side library (helps implementing this
+	and finds best transport automatically)
+	- socket.io server implementations for other languages appearing
+		(e.g. for Python Tornado)
+	- but sometimes it freaks out (it's not robust yet); server socket.io best run
+		as its lone server on its own machine
+
+Large Django sites at Mozilla
+-----------------------------
+- presentation on github (@andymckay; github.com/andymckay/presentations)
+- have 170 websites at mozilla
+- ff download stats site built on Django
+- talk is about add-ons (all code is on github at github.com/jbalogh/zamboni)
+- changing one URL at a time from CakePHP to Django
+- 150mn view per month, but 750+mn API hits per DAY
+- 40k PHP => 18k Python (15k unit tests)
+- Zeus load balancers at front who do most caching
+- cache machine http://bit.ly/cache-machine
+	- mapping sql statements to objects; when later changes, sql statements get nuked
+- http://bit.ly/select_related, transformer http://bit.ly/queryset-transform
+	= both help with tons of sql statements used on page (CHECK)
+	- homepage went from 400 sql statements to 14
+- use celery (CHECK)
+- check statsd (django package that sends UDP everytime something happens)
+- also use Graphite
+- use Jinja2 instead of Django templating
+- put build id into memcache so it still works when deployed on lots of servers serially
+	(so not all of them are on same version)
+- bleach = django cleaner for HTML with LOTS of tests
+	- also has linkify, that changes text link into link
+- Flake8 (checks if your code is compliant with PEP8)
+- arecibo = use to collect errors from site and sends one email instead of tons
+	- implemented so it doesn't depend on google app engine
+- django-waffle: easy feature flag and sample
+- django-secure (CHECK; checks for security guidelines conform)
+
+How I Learned to Stop Worrying and Love Python Packaging
+--------------------------------------------------------
+- use restructuredtext for long_desc, so it formats nicely on PyPI
+- package_data includes files you want shipped which are not python files (static...)
+- MANIFEST.in (template for MANIFEST that lists all files to be pu in a distribution)
+	- use as well as package_data (best result)
+- PEP 386 defines standard for versions
+- install BINARY packages GLOBALLY using your operating system's package management
+	(PIL, lxml, database adapters) = ??
+- vendorize packages that require modifications or short term patches (but DOCUMENT IT)
+- install often updated and your project specific packages LOCALLY (virtualenv)
+	- virtualenv and virtualenvwrapper
+- pip rules and check slides for examples :)
+	- turn download cache so you can reinstall files even offline
+- distutils2
+	- toolbox with reference implementation for PEP 345, 376 and 386
+	- standalone pysetup tool that installs and uninstalls distributions
+		(e.g pysetup install Django)
+	- metadata available outside of Python file in setup.cfg
+	- already in Python 3 trunk as "packaging"
+- more dist2 features:
+	- defined requirements depending on environment (better dependancies)
+		(e.g. Requires-Python: >=2.5,<3)
+	- obsoleting other releases
+		(Obsoletes-Dist: OtherProject (<3.0))
+- moving from dist to dist2: pysetup3 create for conversion setup.py to setup.cfg for
+	forward compatibility
+	- pysetup3 generate-setup for conversion setup.cfg to setup.py for backwards
+	compatibility
+- new format for setup.cfg looks like INI
+- in doubt? Read Hitchhiker's Guide to Packaging
+
+Django and PyPy: performant is a word
+-------------------------------------
+- MUCH faster than CPython, but doesn't support all C extensions
+- they have a few solutions, which are pretty good for well behaved C extensions ;)
+- CHECK gunicorn as substitute Apache (don't use mod_wsgi, because it's C extension)
+	- any python web server should work (WSGI compliant)
+- RPython psycopg2 compatible lib, requires compiling your own PyPy;
+	- pg8000  and other pure python libs work with PyPy, but Django doesn't
+- MySQL is not compatible with PyPy Django (Alex working on replacement)
+- PIL works under CPyExt, lxml doesn't work at all
+- help needed for front tool: bit.ly/pypy-recruiting
+- alexgaynor.net and pypy.org
+
+3 CMSes in 45 minutes
+---------------------
+- Django Fiber
+	- directly work with content on site (dnd, adding text, editing...)
+	- check if useful for start of lego
+- django-cms (divio)
+	- multilingual, multisite, editorial workflow, permission mgmt, built to be extended,
+		frontend editing, reusable plugins
+	- huge community (170+ contributors...)
+- merengue
+	- also direct handling, but feels a bit nerdy
+
+One size fits all: responsive web design with Django, Compass and the Less Framework
+------------------------------------------------------------------------------------
+- media queries are the dope
+	- http://mediaqueri.es
+- tools:
+	- compass (compass-style.org and sass-lang.com) a framework on top of sass which
+		provides with bits of encapsulated behavior - CHECK
+		(it's ruby ;))
+	- less framework (lessframework.org)- layout framework optimized also for mobile devices
+- check slides to see how install ruby gems into virtualenv
+- django-compressor (in trunk patches to allow it to deal with compass files)
+- import order: global -> default -> tablet -> wide-mobile -> mobile -> high-px-ratio
+
+Lightning Talks
+---------------
+- Django REST Framework (uses 1.3 class based views, RESTful Web APIs)
+	- create web browseable APIs - CHECK
+- revised form rendering - Gregor Mu... is working on it
+	- fixes dynamic prefix/suffix problem, because you can define template used for each
+		display of particular field
+	- @gregmueller ?
+- DjangoZoom
+	- managing servers sucks/deployment is a pain
+	- sys-admin = non-coding time :(
+	- djangozoom.net (private beta right now)
+- django-dynamicforms (forms in db)
+	- support confirmation email for those filling out forms online
+- PyCharm demo - CHECK (looks worth learning)
+
+
+Day 2
+=====
+
+Who cares about Zope?
+---------------------
+- a tour through Zope, which while fascinating is mostly not applicable
+- check fanstatic.org for easier handling of static
+
+Bitbucket - Lessons learned
+---------------------------
+- another gunicorn convert; CHECK puppet (no idea what it is)
+- Bamboo for CI testing (continuous integration)
+- Kong for headless tests (and Selenium for functional tests)
+- stay idiomatic! (it's easy to get help; free upgrade with little backporting, easy to pick up)
+	- use mixin classes to add functionality to straight models
+- disadvantages:
+	- kinda feels like you're shoe-horning sometimes
+	- unusual application requirements (bitbucket is quite transactional)
+- things change (whatever you create, you will have to change it eventually)
+	- embrace it!
+	- don't lock yourself into technologies when you don't have to
+- use Celery, South, (social)registration, compressor... a lot of really well-done stuff out there!
+- they wrote: django-piston, django-dogslow, tipper (CHECK)
+	- django-dogslow is middleware that dumps stackframe for request after 25 seconds
+		(because after 30 gunicorn will kill it with -9 signal and you get nothing)
+- be transparent & humble (developers want to know what happened)
+
+Continuous integration and continuous deployment
+------------------------------------------------
+- they used to have feature branches and had merge hell
+- use jenkins (django-jenkins)
+- deploy to staging on every commit
+- basically an argument for CI and CD
+- use Gargoyle from disquss for feature flags
+
+unjoinify: a module to tame the SQL beast
+-----------------------------------------
+- a library for efficiently retrieving deeply-nested data sets
+	(for people who aren't afraid of a bit of SQL)
+- you need to follow its way of naming models for it to work
+- CHECK django-queryset-transform (simon willison's work)
+django settings.py evil
+Celery - An asynchronous task queue (not only) for Django
+---------------------------------------------------------
+- task queue
+- benefits:
+	- decoupling of information producers and consumers
+	- profit from async processing
+	- improve scalability and replace cronjobs
+- default broker is RabbitMQ, but you can use others (Redis, CouchDb...)
+- handles sync, async and scheduled tasks
+- RabbitMQ, implemented in Erlang, has clustering support and AMQP (advanced messaging
+	queuing protocol)
+- celery features:
+	- serialization (pickle, JSON, YAML or custom code)
+	- task sets and subtasks (set together tasks that need to be completed afterwards)
+	- retry failed tasks
+	- routing (only AMQP brokers)
+	- different result stores (where info get or store results)
+	- easy logging from tasks
+	- webhooks!
+	- integration with Python Web Frameworks (Django, Flask, Pylons)
+- since 2.0 SQLAlchemy is used and Django integration done through django-celery
+- pip install celery; depends on:
+	- kombu - an AMQP framework for Python
+	- amqplib - Python AMQP client
+	- anyjson - a uniform JSON API
+- first set up RabbitMQ queue:
+	- rabbitmqctl add_user myuser mypass
+	- rabbitmqctl add_vhost myvhost
+	- rabbitmqctl set_permissions -p myvhost myuser ".*" ".*" ".*"
+- then we can add python task:
+	from celery.task import task
+
+	@task
+	def add(x, y):
+		return x + y
+- Python task configuration
+	#  celeryconfig.py
+	...lots of stuff... :)
+
+- task execution:
+	>>> from tasks import add
+	>>> result = add.delay(1,2)
+	>>> result.ready()
+	False
+$ celeryd
+	>>> result.get()
+	3
+	>>> result.result
+	3
+	>>> result.successful()
+	True
+- Django: pip install django-celery
+- check slides; I can't make note of this slides ;)
+- Webhooks
+	- from celery.task.http import URL # POST
+	- from celery.task.http improt HttpDispatchTask # GET
+- celerymon for monitoring queue processing
+
+Reusable Apps using "EightSpaces"
+---------------------------------
+- Django EightSpaces
+- kind of same problem as Videa (lots of almost same installations, but not quite)
+- class based everythingdjango settings.py evil
+	- singleton objects
+		- inheritance
+		- concept of self
+- 369 lines of code
+- neat solution for minimum change of code between copies based basically on classes
+	that have methods to return the real thing so views and other places just use
+	those methods and don't need to change or have that info passed through
+	arguments
+- problems:
+	- lack of elegance
+	- circular imports
+	- south gets mildly confused
+	- only used if apps are prepared for this approach
+- alternatives:
+	- settings.py
+	- choose your intefaces carefully
+	- generic keys
+
+Core developers panel
+---------------------
+- Alex says he want py3 version od django have working by end of summer
+- favorite 3rd party apps:
+	- debug toolbar
+	- south
+	- django-secure got another shout (CHECK)
+	- django-social (by Bruno ... brutas on github?)
+	- the imaging thing (someting like solr :))
+- really do CHECK staticfiles, which were integrated in Django 1.3?
+
+The Django ORM and multilingual database contents
+-------------------------------------------------
+- approaches:
+	- 1 table, 1 extra field per translatable field per language (single-table)
+	- 1 extra table with key/value translations (hash-table)
+	- 2 tables, one for translated fields, one for the untranslated fields (dual-table)
+	- JSONField/PickleField
+	- Gettext
+	- Google Translate
+- single table approach:
+	- pros:
+		- somewhat easy to implement
+		- few queries
+		- fallbacks
+	- cons:
+		- multisite
+		- migrations
+		- size of query result
+		- hard to implement ordering/filtering
+		- no joins
+- hash table:
+	- pros:
+		- easy to implement
+		- only translate once
+	- cons:
+		- slow
+		- no ordering
+		- filtering is hard
+- two table approach (tested for years in django-cms):
+	- pros:
+		- can be made very fast
+		- few queries
+		- works wonderfully with South
+		- makes sense
+	- cons:
+		- harder to implement
+		- joins
+- django-multilingual-ng way - don't use it (says author :)); two table approach
+- django-nani (same author, but now cool ;))
+	- alpha, but tested; not production ready yet, but should be soon
+	- optimized for single language read queries
+	- write is fairly optimized
+	- fallbacks are a bit more expensive, but have to be used explicitly
+	- ordering, filtering etc. work as expected
+	- migrating nontranslatable app to be translatable should be doable by just
+		changing models (wrapping fields in translatable field provided by nani)
+- problems:
+	- when querying over relations, the starting model has full pover over the query
+	- it's not easy to store additional info on Meta
+	- the implementation goes deep into the Django internals
+
+Integrating the Enterprise using Django
+---------------------------------------
+- don't really care; talk for other Django users ;)
+- slides might be useful if I evern need to do consulting in this area, so fetch them :)
+
+Lightning talks
+---------------
+- pomodoro technique = time management technique
+	- choose a task to be accomplished
+	- set the pomodoro timer to 25 minutes
+	- work on the task until it rings
+	- take a short break (5 minutes is good)
+	- every 4 pomodoros take a longer break
+
+	- lots of interesting reasons why it works (should try it once)
+- django query mixins
+	- django-qmixin on github
+	- simplifies writing Managers using mixin classes
+- javascript do it the right way (stuff experienced js developers know)
+- dajax = set of easy to use AJAX libraries for djangozoom
+	- django-dajax and django-dajaxice
+	- CHECK
+	- creates python-js pairs (decorator defines which python functions will be
+		exposed as javascript functions you can call on client)
+	- django-dajax = manipulate DOM through python
+		- supports js frameworks like moo, jquery...
+- needle.readthedocs.org (automated tests for CSS)
+	- bfirsh/needle on github
+- skills (new site for technical hiring - where they do prescreening)
+	bit.ly/skills-djangocon (test for tweaking site; help needed)
+
+
+Day 3
+=====
+
+The Impact of Django
+--------------------
+- look back at 2005 Django, when it was first released
+- Django instrumental in success of WSGI
+- Django hates packaging and many projects now follow this (svn checkouts)
+	- django had setup.py and ez_setup.py in early days
+	- changed later to avoid net connection requirement and went with bundling all requirements
+	- django developers are now involved in distutils2 development
+- djangode - django templates for javascript (simon willison's code) CHECK
+
+An iPhone-Python love affair: Building APIs for mobile
+------------------------------------------------------
+- your (mobile) api should
+	- return hierarchies of related data
+	- authentication and authorization
+	- have mobile-specific error codes and messages
+	- accept arrays of related or unrelated database
+	- return pre-calculated data or data that doesn't exist on device
+- also
+	- never return HTML
+	- tailor response codes to actions on device
+	- return messages designed for the end user (if you have codes and messages on device
+		then you can't change them quickly - you have to go through app approval process)
+	- never, ever return HTML :)
+- you have to save data locally, since app can be used where there is no connection
+	- be able to send it later
+- precalculated data or data not stored on device
+	- no other users are stored on device
+	- leaderboards or other calculated user data must come from the server
+- Tastypie - webservice API framework for Django (CHECK)
+- really important to write a detailed API doc (interface with mobile developers)
+- Urban Airship  might be good match for Django push messages (CHECK); it's a service
+
+The Best and Worst of Django Core
+---------------------------------
+- find slides to see what kind of code is most likely to be accepted
+- don't just bolt new features on a bad foundation
+- code that's lovable is essential for extension
+- RelatedFields: comments says everything: hack
+- nice API: smartif (bit.ly/django-smartif)
+	- nicer than rest of template parser (world's scariest regex)
+- code tends to reflect the complexity of the problem it solves
+	- we can't choose to solve easier problems
+	- don't make the code more complex than the problems it solves
+
+Django on Rails: Getting Resourceful
+------------------------------------
+- http://www.w3.org/TR/webarch/ - architecture of www (brilliant)
+- rails url scheme (github: zacharyvoase/dagny is Django version) - CHECK
+
+Deploying, At An Unusual Scale
+------------------------------
+- ep.io
+- real colo'd machines, linode - both pretty reliable (ec2 pretty unreliable)
+- IPv6 compliants
+- 0MQ (we used to use Redis, everything now on ZeroMQ, eliminates SPOF - single point of failure)
+- logging/stats all done async using 0MQ
+- databases: shared (only for psql), dedicated and psql9
+- static files: needs a URL and a directory path
+- settings issues - no real standard:
+	- vanilla settings.py
+	- local_settings.py
+	- configs/HOSTNAME.py
+	- many others
+- python paths can present problems (project name in imports...)
+- dbs:
+	- sql is postgresql
+	- have redis for key-value, mongodb soon
+	- some things assume a safe network
+- HA
+	- not terribly easy with shared DBs (psql9 sensible warm standby)
+	- redis has SLAVEOF
+	- possiby use DRBD for general solution
+- HA is not a backup; btrfs for consistent snapshotting, archived remote syncs, no access to backups from servers
+	(so safe from hacked servers)
+- migrations are kind of problem :)
+	- no solution yet for migration/code sync
+	- we're working on it...
+- use gunicorn
+	- small and lightweight, supports long-running requests and pretty stable
+- nginx for rest: more lightweight, extremely fast and really, really stable
+- load balancer: used to be HAProxy
+	- rewritten to custom Python daemon
+	- eventlet used for high throughput
+	- can't use nginx, no HTTP 1.1 for backends
+- celery: slightly tricky to run many; ep.io uses redis as the backend
+- some general advice (if you're crazy enough to do this)
+	- messaging' not enough (having a state to check is handy)
+	- why run one, when you can run two for twice the price (redundancy is good, double redundancy is better)
+	- always expect the worst (hope you never have to deal with it)
+	- the more backups, the better (make sure you have historical ones, too)
+	- django is very flexible (sometimes a little too flexible)
+	- your real problems will emerge later (don't over-optimise up front for everything)
+
+Taming runtime dynamic models in Django
+---------------------------------------
+- idea came from wish for each new senzor to have its own db table
+- dynamic models created with type(), but need a bit of help (check slides)
+
+Scalability panel
+-----------------
+- common mistake:
+	- assuming a single server
+	- working on small subset of data and not realizing something will be slow on real data
+	- things that take long time (more than a second; e.g email)
+- good first step in schema definition:
+	- get db schema roughly correct
+	- which tables are going to grow fastest?
+- monitoring: munin, nagios, pingdom
+	- nagios has protection from too quick alert, but not configured like that by default
+- puppet for managing infrastructure
+- mozilla prefers lots of methods instead of big joins since it's more readable
+- sometimes Django ORM joins columns it doesn't use (or at least it used to)
+- varnish gives you a lot of control for invalidating cache (if you put code when to
+	invalidate in python code that calls varnish)
+- mozilla used to use pip for rollouts, but changed to git (they run their local github mirror)
+- rollout: DELETE .pyc files, because they screw things up
+- which python vm would they consider if they started today:
+	- pypy, but they don't really trust it yet
+	- mozilla sticks to cpython (because of IT)
+- don't visit admin interface if you have 8 million users :)
+- use postgres command to output slow queries
+- they never rollback database and never delete old data (who knows when or who needs it)
+- strategies for backfilling of data at scale:
+	- cronjob (mozilla) and sometimes takes a day or so; fill in early
+
+Whither Django?
+---------------
+- Russel recently moved to startup 2nd Chair Systems
+- managed to do backwards compatibility rather well (relatively easy moving to new versions)
+	- same for security
+- django 1.4 coming features:
+	- class-based form wizards
+	- signed cookies
+	- configurable admin filters
+- this isn't a formal roadmap for 1.4; this is where we could go
+- maybe:
+	- App Refactor
+	- more Class-based views (used for e.g mixins of functionality shared with admin)
+	- lazy foreign keys
+	- ...which means configurable User models
+- probably not
+	- anything from GSoC 2011
+		- template based forms
+		- composite keys
+		- schema migration
+		- compiled templates
+	- NoSQL/Query Refactor (GSoC 2010)
+- beyond 1.4? what's missing?
+- 5 interesting trends
+	- better packaging tools
+		- things are improving in Pythonland; contrib stuff could become external
+			package
+	- deployment tools (Python is not really there yet; django can't have war file like java yet)
+	- microframeworks (like Flask) - how micro is micro? worth thinking about
+	- project merges (Pyramid is something like that; what's Django position in this?)
+	- concurrency (why is node.js getting so much press? realtime web?)
+- Whither or Wither?
+	- risks:
+		- paradigm shifts
+		- inertia
+		- lack of volunteers
+- Python 3 - needs looking into
+- Django 2?
+	- can we get rid of the settings singleton?
+	- shoulde Django 2 be more modular?
+	- could Django 2 be based on Pyramid?
+	- how does this coincide with Python 3?
