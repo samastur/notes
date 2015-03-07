@@ -198,15 +198,91 @@
 	* don't rely on what you think you know. prove it.
 
 ## Containerized Applications with Docker, Laura Frank
-
-
+* containerisation: what is it?
+	* Docker != containers (it's a tool for manipulating containers)
+* containers
+	* a virtualisation layer, kind of like a virtual machine; it's a self-container execution environment
+	* share the kernel of host system
+	* are isolated from other containers
+	* have fast boot times & low overhead
+* containers can work in conjunction with *or* in place of virtual machines
+* like VM, but certain fundamental differences
+* if we use containers, we can get rid of hypervisor and host layer and use container runtime engine instead (would be great to look at slides of this talk for diagrams)
+	* libraries are shared now
+* container have slightly more complexity but...
+* benefits of containerisation: fast, cheap, portable and safe (the worst thing you need to do is to reboot your container)
+* using containers in your applications (with Docker)
+* on Linux install docker with official packages; anything else you need to use a lightweight VM (need just one in which you can run lots of containers)
+	* pro tip: Boot2Docker (OSX and Windows)
+* Boot2Docker feels *almost* native
+* all containers are based on images; to run your application in a container you must first create an image (an images is controlled by  **Dockerfile**  )
+* two ways to get them:
+	* pull down from Docker Hub (docker pull foo/bar or docker run foo/bar)
+	* build from your own Dockerfile (docker build -t foo/bar .)
+* registry.hub.docker.com (looks and feels very similar to github)
+* public registry has two types of images (make sure you are pulling down the right one):
+	* services (static)
+	* project base images (dynamic - meant for development)
+* private registry (get image from Docker Registry)
+	* can have authentication
+	* push and pull just like with Docker Hub
+* application templating
+	* use your own images or images from Docker Registry
+	* specify config options beforehand
+	* run application with one or two simple commands
+* tempting:
+	* Docker Compose (aka Fig): text-only tempting tool (requirements into docker-compose.yml and run `docker compose up`)
+	* http://panamax.io/get-panamax (alternative, but has UI and supports remote deployments)
+* rheinwein/hello-world-container-demo
 
 ## Developing a Mindset for Web-Security, Frederic Hemberger
-
-
+* security and lack thereof is almost always a design choice and business decision (@halvarflake)
+* security is an ongoing process throughout your project's lifetime. It's not an item to tick off in a feature sprint
+* defensive programming 101
+	* secure input and output handling
+		* the URL (including path or query parameters)
+		* HTTP method (GET, POST...) and headers
+		* form values, file uploads
+		* cookies, browser storage
+		* data exchanged with APIs, Flash, applets, etc.
+	* validate user input
+		* data type validation
+		* range and constraint validation
+		* business logic validation
+	* sanitise user input
+		* remove ASCII control characters, null bytes, Unicode LTR/RTL characters, Unicode whitespace,...
+		* (usually) remove all HTML; if needed, then use whitelist
+			* never use regular expressions for filtering HTML
+		* encode output where necessary (choose the correct encoding depending on the context)
+	* dependencies
+		* don't assume frameworks and libraries use secure defaults
+		* use recent version (75% of top 100k websites use jQuery older than 2.5 years and 35% more than 5 years)
+		* Node security project + Retire.js (used for scanning your dependencies for vulnerable versions)
+			* can be used as CLI or grunt/gulp tasks
+		* Lint your code, aim for high code coverage in your unit tests
+		* check inputs (forms, APIs,...) during integration tests: invalid input, null bytes...
+	* secure communication
+		* use HTTPS with TLS (for all sites storing user data, using downloads, software updates...)
+		* all your site's content must be served with HTTPS (make it stick using HTTP Strict Transport Security header)
+		* be aware of possible side channels (and seal them using Content Security Policy)
+* gather metrics
+	* use centralised logging to detach unusual behaviour patterns (set up automated notifications and alerts)
+	* security is an ongoing effort: you need to revise your tools and processes when necessary
+*  fhember.gr/websecurity-resources (list of web security related resources)
 
 ## Say Hello To Offline First, Ola Gasidlo
-
-
+* offline > error handling
+* does our app need to inform user about connection state
+* build trust
+* unsaved cycle symbol (search online branch.com/b/...)
+* decide: can app make any decision on what to do with data
+* traditionally: server source of truth and client with a role of prophet
+* with offline first we want to decouple this relationship
+* interesting talk, but not quick enough to make notes => search for recording
+* new approaches: hood.ie sync (open source tool built on top of node.js and couchdb)
+* appcache-nanny helps dealing with app cache problems
+* service worker
+	* additional cache...
+* do not lose data! (first law of offline first)
 
 ## Lightning Talks
