@@ -138,12 +138,64 @@
 
 
 ## No More Tools, Karolina Szczur
-
-
+* we assign empowerment to our choice of tools and tooling, which may not be true (good artists are good no matter which tools they use - huh?)
+* simplicity: visual and/or operational
+* we live in superabundance of information and the most crucial skill isn't multi-tasking but single-threading our attention
+* the strive for simplicity is superficial; complexity is a fact of the world, simplicity is in the mind (Don Norman)
+* Tesler's law of conservation of simplicity; every application has an inherent amount of irreducible complexity (the only question is who will have to deal with it)
+* automation so we can focus on tasks that *can't be delegated*
+	* postcss/autoprefixer
+	* csslint/csslint
+	* media optimisations (strip bytes)
+		* jamiemason/imageoptim-cli
+		* jakearchibald.github.io/svgomg
+		* addyosmani/tmi
+	* magnification
+		* jakubpawlowicz/clean-css
+		* jbleuzen/node-cssmin
+	* code bloat (search and remove unused declarations)
+		* giakki/uncss
+		* geuis/helium-css
+	* testing performance (find specific elements hindering performance)
+		* zeman/perfmap (colours slow elements on page)
+		* adyedinborough/stress-css
+* debugging layout issues (find problems with the box model): pesticide.io (Chrome extension)
+* GUIs for automation
+	* Hammer for Mac
+	* CodeKit
+	* Livereload
+* frameworks: Bootstrap, Foundation and Pure versus Basscss and Tachyons
+	* better to start with smaller projects as foundations
+* bit.ly/front-end-tools (great list of all sorts of tools)
+* *npm* provides a native ecosystem for task automation
+* Gulp and Grunt
+* collaboration
+	* bottom line: empower yourself, your team and community to work faster
+	* put good of your team before personal preferences
+* good tools, especially command line based, don't fail nor succeed silently
+* it's easy to introduce unnecessary complexity by adding tools that manage other tools
+* the right set of tools or lack thereof sets apart a craftsman from an operator (so what are the right ones? :))
 
 ## Useful Performance Metrics, Ben Schwarz
-
-
+* 40% of people abandon your site when it takes more than 3 second to load (source: kissmetrics)
+* etsy.com: add 160K to a page increases bounce rate by 12%
+* 80%-90% of what people perceive as performance happens in browser
+* lots of known stuff: minimisation, css animations, hardware accelerated properties...
+* quicker also means less battery burn
+* only load what you actually need
+* Guardian loads article in HTML and the rest of website with AJAX calls
+* **idea: set a budget (how much is too much?)**
+* window.performance.timing (for building own metrics)
+* user timing API: window.performance.getEntries() (slew of metrics for every asset on page)
+* set a mark (to measure length of actions you are interested in): window.performance.mark('tweet')
+* window.performance.getEntriesByType('measure')
+* radical tools:
+	* pingdom/new relic (real time stats about your users)
+	* csssstats.com
+	* calibreapp.com (speaker its author)
+* takeaways:
+	* monitor your work & set performance budgets
+	* don't rely on what you think you know. prove it.
 
 ## Containerized Applications with Docker, Laura Frank
 
