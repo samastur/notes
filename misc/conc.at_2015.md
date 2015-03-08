@@ -286,3 +286,42 @@
 * do not lose data! (first law of offline first)
 
 ## Lightning Talks
+
+### Augmented reality with web technologies
+* wikitude pitch
+
+### Web development in Lua
+* Sailor, a web MVC framework in Lua
+* Lua: multi paradigm scripting language, looks cool and made in her home country
+* very fast
+* @etiene_d is its author
+* highlight feature is that you can use Lua on client side
+* early development; no backwards compatibility guarantee until version 1.0
+
+### techtrrs
+* an initiative aiming to connect women in tech in Austria
+* 22 members of under-represented minorities came to conference through diversity tickets that would otherwise not be here
+* let people apply for diversity tickets and don't ask too many personal questions
+* don't have pay for diversity ticket program
+* Ada Initiative and Geek Feminism (two good initiatives)
+
+### Pusher (real-time data pushing)
+* real-time dilemma: everyone expects it, but developers don't prioritise it
+* seven example use cases:
+	* chat (multi-device as standard)
+	* collaboration (reduce friction and saves time)
+	* notifications (pushing out alerts)
+	* IoT
+	* user on-boarding
+	* dashboards
+
+### Tips, tricks and gotchas or stuff I've learned and want to shout about because it's awesome
+* modularise Grunt: use load-grunt-tasks and have tasks in separate folder (google Thomas Boyt's blog post)
+* 3D view of Firefox great for finding out why things are a bit off (can see layers)
+* @gembarrett
+
+### ServiceWorker and the offline web
+* AppCache is horrible
+* ServiceWorker you can speak to it and have its caches that you can access
+* can't access DOM, but can make network requests (can control how page requests are handled)
+
