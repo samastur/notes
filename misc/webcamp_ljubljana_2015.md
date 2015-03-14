@@ -49,8 +49,43 @@
 	* Qubes OS: security-focused desktop operating system that aims to provide security through isolation with Xen
 * Containers: the end of the general purpose operating system
 	* Docker compose
+	* RancherOS: a minimalist distribution of Linux designed from the ground up to run Docker containers
 * CoreOS: Gentoo -> Chrome OS -> Core OS
-*
+* RedHat (project atomic)/Ubuntu (snappy ubuntu): using containers to provide updated atomically and rolled back if needed
+* Unikernels: operating system for cloud (Erlan on Xen, OSv, MirageOS)
+	* next step from containers trying to minimise their sizes
+* Mesos from Apache (not sure what it is; check)
 
 
-## It's my way or the highway. How to make your code usable by others, Bogdan Habic
+## It's my way or the highway. How to make your code usable by others, Bogdan Habić
+* OO: encapsulation, inheritance, polymorphism
+* some examples of awful code
+* reasons:
+	* cowboy coding
+	* tight deadlines
+	* "I'll refactor this later"
+* how to fix this?
+	* you won't refactor later!
+* he thinks optimising early makes it more readable and reusable because you think about it more
+* DRY, SOLID principles (can't make architectural mistakes if you use them correctly), design patterns
+* what makes a piece of code: "nice to use"?
+	* easy to implement (shouldn't take more time to use lib than write one your own)
+	* it's eloquent (source should be readable)
+	* works like magic
+* how to make magic (happen)?
+	* the developers should not care about the internals (should not need to open source code to use it)
+	* the code should "lead" the developer (should not be required to read pages of docs for hello world)
+	* it should be modular (should be able to change how parts work without changing its source code)
+* interfaces, abstract classes, traits and exceptions
+* Strategy pattern and Command handler patterns
+* Interfaces
+	* contract good metaphor
+	* known parameter types, known return types and it's self explanatory
+* Abstract classes: looks at them like an interface
+	* very PHP specific example
+* Traits: great when adding functionality to existing class
+	* example of metaprogramming with PHP to do this
+* Exceptions: it's OK to break someones code
+* Strategy pattern: lets changing behaviour of the code (he creates constructor with null value so developers can change its behaviour)
+* Command Handler patterns: data objects with attributes and handlers with <attribute>_handler for mutation of those objects
+
