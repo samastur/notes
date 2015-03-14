@@ -89,3 +89,20 @@
 * Strategy pattern: lets changing behaviour of the code (he creates constructor with null value so developers can change its behaviour)
 * Command Handler patterns: data objects with attributes and handlers with <attribute>_handler for mutation of those objects
 
+
+## Using SASS in web development, Vladan Mitevski
+* short intro to main SASS features
+* @include (mixins) vs @extend
+	* use mixins when CSS properties are same but values are different - add variables for values
+	* use placeholders when both CSS properties and values are the same (@extend)
+* best practices for writing SASS
+	* import @extend first
+	* import mixins second
+	* import regular declarations third
+	* use nested selectors at the end and mo more then 3 levels of nesting
+	* media queries as closest to their relevant rules as possible
+* how SASS can mess up CSS
+	* repeating code when not using mixins proper way
+	* using too much nesting can create very messy CSS (slow, hard to override)
+	* importing partials can mess up organising CSS (not sure how)
+* always have in mind how CSS will be compiled
