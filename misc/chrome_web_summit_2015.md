@@ -115,6 +115,123 @@
 	* protecting against mis-issued certificates
 		* solution 1: certificate transparency (log all certificates publicly and can monitor logs for your website)
 		* solution 2: public key pinning (for websites with more operation experience) - lets site describe what its public key and certificate chain should always look like
-			* Publick-Key-Pins header
+			* Public-Key-Pins header
 			* hard to do right in a way that all clients will match chain correctly; if you get it wrong you are sort of performing DDOS against yourself
 			* new feature in Chrome: deploy PKP with violation reporting (practice mode: don't fail connections that violate this rule, but send me a report if they do; Public-Key-Pins-Report-Only)
+
+
+## DevTools in 2015 - Authoring to the Max
+* can reorder tabs in DevTools and added overflow menu for tabs you don't want to have there all the time
+* improved context menus
+* colour picker and colour palettes; shades of colours come up if you long press on a colour
+	* also coming up a line for seeing and working with colour contrast
+* a new Device Mode for a new mobile-first world
+	* can show media queries (together with breakpoints?)
+* mobile emulation is not the same as actual phone
+	* previously had to do remote debugging through inspect
+	* new: inspect devices within DevTools, can connect from there and debug any pages open on phone
+* rule of thumb: a visual design practise is out of fashion when browser vendors have added a way to do it in CSS (Paul Bakaus)
+* new animation inspection mode
+	* can redesign animation curve with mouse
+	* can capture animations that you can then replay (and see/change structure of)
+* more power to Javascript developers
+	* inline variables while debugging
+	* proactive compilation if you change code while debugging to notify you of syntax errors
+	* can blackbox code (e.g. frameworks) through which you don't want to step during debugging
+	* object formatters (can style/format objects produced from transpilers)
+	* better tools for working with Service Workers in Resources panel
+* Layout mode (WYSIWYG for DevTools; maybe)
+	* more sensible tools (resizing rarely used on non-images); change paddings and margins
+	* with scroll wheel can change rule
+
+
+## Engaging with the Real World: Web Bluetooth and Physical Web
+* Web Bluetooth is already available
+* from Bluetooth PoV there's Device, which has Service(s)
+	* in Services can be multiple values that you can read called Characteristic
+* when you request device (navigator.bluetooth.requestDevice) you also specify which services you are interested in
+* can listen to events produced by characteristics
+* Polymer: platinum-bluetooth
+* BLE peripheral simulator at tinyurl.com/BLE-SIM
+* could phone know about pages available in an area? (google is working on that)
+	* situational discoverability of apps
+	* web needs a discovery service
+		1. Discovery
+		2. Fetch/Rank
+		3. Interact
+* Google playing with few things around BLE picking up urls from beacons that can't trace you
+	* use proxy for protecting privacy as long as there are enough of them
+* Eddystone - Google's beacon format (UID + TLM + URL)
+* http://physical-web.org
+
+
+## How to win at mobile accessibility
+* talk about: barriers, UI patterns and state of tooling
+* why should I bother:
+	* sales potential
+	* legal risk
+	* innovation opportunity
+	* it's the right thing to do
+* Microsoft inclusive design toolkit
+	* disabilities can be: permanent <---> situational (injury, new parent)
+* almost half users use mobile screen reader either more often or almost as often than desktop screen reader
+* accessibility is easier to get right on native platforms
+* barriers to access for mobile a11y
+	* locked-down zoom
+	* hijacked scrolling
+	* visual clutter (minimise cognitive load!)
+	* ambitious visual icons (check your privilege, age, ability, demographic...)
+	* conflicting gestures (other UI affordances needed)
+	* fragmentation of screen sizes...
+	* spotty HTML5/ARIA support (mobile is less mature than desktop)
+* mobile UI patterns
+	* you're competing with browser's Reader View
+	* BBC mobile a11y guidelines (recommended)
+	* use buttons (and other semantic elements)
+	* use aria-label to label buttons and controls (one of easiest wins)
+	* touch targets: generous padding for bigger targets (check menu of simplyaccessible.com)
+	* crafting mobile tab order
+	* hidden links shouldn't be reachable
+		* hidding from screen readers:
+			* display: none (fully hide, but not animatable)
+			* disabling interactive elements in HTML (keep content visible, but hide from reader) with aria-hidden="true"
+* state of tooling
+	* pretty good desktop browser testing tools, on mobile so-so and have nothing to run screen reader and run that
+	* there are differences between desktop and mobile for same tools (e.g. VoiceOver)
+	* iOS Safari has an Accessibility Node Inspector
+	* what would we prefer is an audit that tells you what's wrong without having to manually poke at each item
+	* aXe Audit in Firefox Devtools (not really for checking mobile devices...yet)
+	* Firefox WebIDE can be used to tether FF/Android and check; needs audit tool
+
+
+## HTTP2 102
+* tl;dr: switch!
+* if you invest, you can squeeze out lots of performance
+* http/1.x hacks: concatenate it, minify it, sprite it...
+* http/1.x flaws:
+	* flaw #1: HOL blocking (aka one resource at a time syndrome); can't use connection until transfer is finished
+		* going from 2 to 6 connections just postpones problem
+	* flaw #2: headers repeat a lot across requests (because it is supposed to be stateless protocol and sessions had to be invented) and headers are not gripped
+* http2 is protocol upgrade; it starts as 1.x and upgrade to 2 only if clients supports it
+* http2 is TLS encrypted connection and has only one connection
+	* what used to be one TCP connection is now a logical stream which are chopped into frames so if one starts blocking another one can take over and transfer its data on same connection
+* headers frames and data frames
+* not necessary to do concatenation, inlining, spiriting anymore (vulcanize?) which made caching inefficient as sprite could be invalidated by one item changing
+* since headers are now separated, they can also be compressed (hpack is a header compression specifically for HTTP)
+	* we can ask for value that were sent in previous request while decoding current so we don't need to retransmit it (which makes multiple origins more expensive)
+	* no more need for sharding or multiple CDNs
+* features to exploit if you invest more:
+	* PUSH - allows to respond to request that hasn't been sent yet (offer resources that are complimentary to requested)
+* still needed: GZIP/Deflate, first render, CDNs/DNS lookup, Cache-Control
+* should use now?
+	* browsers ahead of servers (all major browsers support http2)
+	* NGINX, Apache support it
+	* bit.ly/http2implementations
+* local dev: github.com/GoogleChrome/simplehttp2server (http2 and push)
+* production
+	* tier 1: put your static assets on a h2 CDN
+	* tier 2: h2 reverse proxy in front of your server (CloudFlare does this now)
+	* tier 3: full h2 deployment
+* future?
+	* manifest.json for static hosters to specify which items to push for which resource
+	* WebSockets - maybe not a thing anymore (still work, but might be suboptimal as long polling is fine again); time will tell
