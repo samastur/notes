@@ -1,5 +1,8 @@
 # Chrome Web Summit 2015
 
+## Other people's notes
+* Daniel O'Connor: https://danoc.me/blog/chrome-dev-summit-2015-notes/
+
 ## Accessibility
 * 1 in 6 people have some form of disability
 * important to be able to zoom in on UI
