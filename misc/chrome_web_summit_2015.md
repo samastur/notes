@@ -199,3 +199,129 @@
 * future?
 	* manifest.json for static hosters to specify which items to push for which resource
 	* WebSockets - maybe not a thing anymore (still work, but might be suboptimal as long polling is fine again); time will tell
+
+
+## Increase Engagement with Web Push Notifications
+* mobile web has bigger reach than apps (8.9 to 3.5 of something)
+* how to improve engagement? web push (= reach + engagement)
+* you can subscribe notifications that you can receive even months after you have closed the original website's tab
+* Facebook: the mobile web is growing (number of users is growing as fast as users of app)
+	* desktop also still important
+* FB: built proprietary push implementations on Opera and UC browser and now know users want them
+* more examples of happy users of this technology
+* implemented using Service Worker which keeps a connection open to Push Service which pushes notifications
+* pushManager.subscribe sends in Chrome's case message to Google cloud messaging :(
+* push doesn't tell SW what it needs to display, just that event happened and it has to fetch that message from notification Web Server (so not Google)
+* UX
+	* send notifications users care about (is it urgent and important?)
+	* don't request permission on page load
+	* make permissions controllable
+	* de-duplicate with native (same message from native app and web; not solved yet)
+	* refocus existing windows, don't create new tabs (example at 21:00-)
+	* summarise notifications (if more than one message, show summary of all)
+	* load instantly from a notification tap
+* what's next?
+	* custom actions (can build experiences that work within notifications)
+	* payload support (site will be able to send serialised JSON through push service to client to skip network request back)
+
+
+## Instant Loading with Service Workers
+* App Shell + Service Worker (SW)
+* demo shows how new pages load almost instantaneously with SW loaded
+* the model that will be discussed is the surest way of building apps that return in under a second (which is their recommendation)
+* 1 second delay leads to 11% fewer page views and 16% decrease in customer satisfaction
+* What's an App Shell?
+* Anatomy of an App Shell: HTML + styles + Javascript - content (basically what Cordova gives you + urls)
+* cache the App Shell on SW install event (GET /shell and cache its contents)
+* after install event comes activate event where we can clean up cache
+* then goes SW goes into idle until there's a request for network resource
+* Service Workers without the Work: libraries sw-precache (shell) and sw-toolbox (content); both battle tested
+* sw-precache (found on npm)
+	* integrated with Gulp and other tools; creates a service worker code for you for your folder tree of shell resources (includes hashes used in caching so only modified elements get refetched)
+	* sw-precache --verbose
+* sw-toolbox: for caching app's dynamic content; loaded by SW at runtime
+	* canonical implementation of different caching strategies
+		* cache-first, network-fallback (toolbox.cacheFirst)
+		* network-first, cache-fallback (toolbox.networkFirst)
+		* cache/network race (picks from cache, but updates it again from network; toolbox.fastest)
+	* thinking strategically and you can choose different ones for different url patterns
+	* can specify timeouts (e.g.: {networkTimeoutSeconds:3} with networkFirst)
+	* rein in your caches (maxEntries...)
+* SW are progressive enhancement
+	* on first visit there is no SW so pages need to handle that scenario anyway
+	* so your architecture shouldn't change to support browsers without SW
+* SW lets you:
+	* serve the HTML for the landing page cache-first
+	* ...even if that page is server-rendered
+* check iFixit API demo at: ifix-pwa.appspot.com and github.com/GoogleChrome/sw-precache/tree/master/app-shell-demo
+* www.code-labs.io/codelabs/sw-precache/
+* github.com/Google/web-starter-kit (boilerplate and tooling for multi-device development)
+* github.com/GoogleChrome/application-shell (Vanilla JS)
+
+
+## Polymer - State of the Union
+* Web Components library with components
+* 1.0:
+	* re-designed data binding
+	* styling system using custom properties
+	* lightweight shadow DOM shim
+* sets of components (elements.polymer-project.org):
+	* Fe (iron) - core elements
+	* Md (paper) - UI components following material design guidelines
+	* Go (Google Web) - components for Google API's and services
+	* Pt (platinum) - push notifications, offline caching and more
+	* Au (gold) - E-commerce elements
+* Web Components are happening
+* over 1 million pages use Polymer
+* over 320 Google projects use it
+* every feature has a cost (thinking what cost are they transferring with adding it)
+* 1.2 is 20% faster than 1.0 (conservative; in certain cases can be more)
+	* ergonomics + performance (a11y better, nicer to use...)
+* for 99% of needs you can get everything you need with Polymer and Service Worker: web is now a first class application platform
+* web has become a first class development platform (don't build walls between yourself and the platform)
+* polymer is like a scalpel right now: can do powerful stuff but still need to be careful
+* it should be easy...to use components, build, share, optimise and assemble apps from components
+* common polymer mistakes:
+	* missing imports
+	* binding to a non-existing property
+	* incorrect class binding
+	* unbalanced delimiters
+	* missing computed property functions
+	* broken observers
+	...
+* polylint: for catching mistakes without needing to transfer not-required code
+* polydev: chrome DevTools extension for profiling web components
+* how do I:
+	* structure my app?
+	* lazy-load sections of my app?
+	* handle routing?
+	* internationalise?
+* Carbon elements - work in progress to above problems (should be as close to platform as possible)
+	* app layout elements (more general solutions than Material Design layout components): for example tabs on top on desktop that move in sidebar on mobile
+	* https://polymerlabs.github.io/app-layout/
+	* other things more work in progress
+
+
+## Progressive Web Apps
+* SW important because they keep urls (if you can't link to it, it's not web)
+* the cost of user to try an app is between 1 and 2$; cost of loyal user has gone up to 4$
+* low friction is the web secret weapon (every step reduces adoption by 20%)
+* adding to desktop is different from bookmarks because you might bookmark a smaller bit of a whole (a specific URL not root one)
+* Chrome's Progressive Web App Install Heuristics:
+	* needs Service Worker (manifest _start_url_ must always load)
+	* TLS (site must be at a secure origin)
+	* engagement (2 visits to scope'd documents over 5+ min)
+	* manifest (valid manifest with required properties)
+* Opera thinks progressive web apps are a great match for budget phones
+* Web Manifests store metadata for a Progressive Web App: icons, description, colours, and related info that lets browsers create high-quality experiences for the launcher icon, task switcher and splash screen
+* a bit before 20 minute it starts to explain manifest contents
+* @media (display-mode: standalone)! (at least in Opera)
+* manifest creator: brucelawson.github.io/manifest
+* manifest validator: mounirlxmouri.github.io/manifest-validator
+* chrome://inspect for debugging on devices and use DevTools for development
+* chrome://flags: use to bypass user engagement checks for development
+* things to consider:
+	* without URL bar, app needs to provide own navigation (refresh & back/forward UI)
+	* share UI: integrate with native: https://goo.gl/8pF0ca
+	* onbeforeinstall Event: lets you prevent banner, re-show at opportune time, enables install rate tracking for analytics
+	* deep linking considerations: working on it!
