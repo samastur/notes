@@ -50,4 +50,26 @@
 * http://andreicek.eu/rxjs
 
 
-## Andraž Bajt, Purely functional frontend
+## Andraž Bajt, Purely functional front-end
+* bad procedural programming: global mutable state, no modularity, hard to test, relevant pieces may be far apart
+* what we want: modularity, local reasoning, reusability, comparability and abstractions
+* this is the promise of Pure FP (functional programming)
+	* everything is a value
+	* pure functions (values go in and go out and nothing else happens outside)
+	* no mutable state!
+	* no effects!
+* if all values go in, then we have **Components** (instance only depends on parameters)
+	* is a value, has local reasoning and local testing; reusable
+	* will still have a local state and may perform effects
+	* may be good enough (AngularJS - directives, passing values around, services)
+* React has purely functional components in last version (pure-isa; props -> virtual DOM)
+* how do we handle (non-local) state?
+	* you can encapsulate it in services
+	* a special case of cross-component interaction? (events) => this approach scales
+* Purifying Events?
+	* problem with events is that it is implicit
+	* Reactive components => make events explicit with Cycle.js (Component: [Observable] -> [Observable])
+* Purifying state?
+	* external with emitting events (Redux.js)
+* problems: integrations and tooling still in early stages
+* best practices are still being developed (community converging on Redux)
