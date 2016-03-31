@@ -147,7 +147,7 @@
 * Postgresql SERIALISABLE is the only one that actually is
 * Django will start using READ COMMITTED on MySQL by default
 
-#### Kinto - a backend for web apps RectJS, Remy Hubseher
+#### Kinto - a backend for web apps ReactJS, Remy Hubseher
 * what if we could deploy an instance and use an existing client to configure and consume the API
 * KINTO - a lightweight JSON storage service
 * sync, permissions, push notifications, ops friendly, encryption, ReactJS admin
@@ -159,7 +159,7 @@
 * Wombats poop cubes
 * Koala pouches are upside down, so are wombat pouches but that makes sense
 * Pyromania - falcon that starts bush fires as part of its hunting process
-* Australian sheep have learned to commando-roll over road rails (cows not yet)
+* Australian sheep have learned to commando-roll over road rails (cows not yet) - NOT TRUE
 * Emus - army once declared war on 20000 aggressive emus; emus won
 * Which one is a lie?
 * DjangoCon AU in August!
@@ -175,3 +175,235 @@
 * you can make people really happy by thanking people for doing awesome things
 * github.com/LABHR/octohatrack (helps tracking these contributions)
 * http://labhr.github.com/hatrack
+
+
+
+## Day 2
+
+### Keynote: The Art of Programming, Erika Heidi
+* excelled at programming courses, but failed maths
+* is programming science or art?
+* art: the expression of human creative skill and imagination, generating an output that can be possibly experienced by someone other than you (Erika's definition)
+* art: not an adjective; doesn't need to be good, beautiful
+* Margaret Hamilton began using software engineering to distinguish it from hardware; wasn't taken seriously for a long time
+* programming language are building blocks
+* programming is both art and science
+* community drives adoption
+* "if you want to go fast, go alone. if you want to go far, go in company"
+
+
+### Introducing Django To The Foreign World, Bashar Al-Abdulhadi
+* Kuwaiti open-source enthusiast
+* we have people from 40+ countries speaking 30+ languages
+* we have 3 different language directions among them: LTR, RTL and Top-Bottom (LTR on web)
+* Arabish = English + Arabic (Arabic words using English alphabet): used at the beginning to chat on IRC
+* they use numbers in place of some characters; also abbreviations like Q8 for Kuwait
+* Kh represented with 5 because 5 in Arabic starts with Kh
+* startups, Google, Microsoft etc. started to adopt Arabish as an input method when Arabic keyboard didn't exist yet
+* challenges in transformation of English & Arabish to Arabic
+	* fonts (joining letters wasn't supported in early days)
+	* Arabic support in browsers (used images instead of text)
+	* databases: no standards to follow for encodings
+	* Python also had problems with connected letters (shows screenshot of a browser where content renders fine, but menus don't)
+* Initiatives: ArabEyes.org (non-profit group for translating applications)
+	* have technical dictionary to standardise terminology
+* Standards (like unicode)
+* django-parler presented as lightning talk in DjangoCon.eu 2014; got him more involved in project
+* he started to translating and coordinating translation of more and more apps
+* moving forward: collaborative translation
+	* add your package to collaborative translation sites (you never know who will be interested)
+	* support your native language on other packages
+	* a little continuous contribution is better than discontinuous bulk one
+
+
+### IoT with Django: From hackathon to production, Anna Schneider
+* she'll discuss IoT where vendors already provide web APIs
+* we'll look at patterns and anti-patterns of using Django for IoT projects
+* Models
+	* we want to be storing vendor ID number (vendor's unique ID; whatever data you need to send to their API)
+	* on observation model you want to store timestamp (there will more of them than objects in usual apps)
+* Tasks (outside of request/response cycle)
+	* kinds: monitor and control; generalisable and custom
+	* pass pas (pro: don't rely on database state; con: can require multiple calls)
+	* encapsulate client! (easily mockable/testable)
+* Celery!
+	* Django celery (djcelery) creates more problems than it solves
+* github: aschn/cookiecutter-django-iot.git (cookiecutter template)
+* Lessons:
+	* data model: Device, Attribute, Status
+	* tasks not views: outside request/response
+	* easy but rigid: Heroku Scheduler
+	* flexible but complex: celery periodic tasks
+
+
+### The Power ⚡️ and Responsibility 😓 of Unicode Adoption ✨, Katie McLaughlin
+* 7 bits enough to encode English; 8 bits for western countries
+* Unicode create to solve problem of other languages (including dead)
+* allows for about 1 million of code points and we are using about 10% now
+* UTF-32 can encode everything, but can waste a lot of space for certain languages; so we like UTF-8 more
+* what about emoji? started in Japanese telcos without standardised codes
+* Unicode7 in 2014 and Unicode7 in 2015 added even more emoji symbols
+* Android's emoji's are shit; MS clapping hands are too
+* you know what? all have problems
+* 5 things that gets emoji included:
+	* is there compatibility issue?
+	* is it frequently used?
+	* distinctiveness
+	* completeness
+	* frequency of requests
+* whisky will get added! :)
+* platforms use different way to mark them (:cake: on slack or (cake) on hip chat)
+* never rely on user agent to be able to handle emojis; use alt-text for code point
+* proposal to include special chars that will flip the direction of emoji display
+* use Twitter or Emoji1 set (both open and Twitter is also widely used)
+
+
+### A Brief History of Channels, Andrew Godwin
+* goals:
+	* hard to deadlock
+	* built-in authorisation
+	* widely deployable
+	* scales down
+	* optional
+* Django as it stands is not built for this (async calls)
+* channels: instead of requests we have events
+	* events of the same type are grouped on a named channel
+* instead of writing a code against request you now write for channel
+* a channel is a **named, FIFO, at-most-once, non-broadcast, network-transparent** queue of messages
+* Protocol Server and Worker Server are now separate
+* you can send onto channels from anywhere (model.save, view...)
+* responses are on single-reader channels (http.response!1A2B3C)
+* how do you use it?
+	* Views are "replaced" with Consumer that takes an event and send zero or more events
+	* you can't wait on an event (=>avoids deadlocks)
+	* every message on a channel runs the consumer function
+	* http.request routes to a view system consumer
+* channel is low level; not end-to-end solution
+* routing.py: urls.py for Channels
+* message.user: like request.user
+* message.channel_session: per-socket sessions (because there's no built-in shared state)
+* Groups: broadcast/pub-sub
+* backend is pluggable and has a specification so you can replace it
+* github: andrewgodwin/channels-examples (heavily annotated)
+* pip install channels (Django 1.8 and 1.9); docs were written first so should be pretty complete
+
+
+### Hermione Granger and the Wizard Information System, Lacey Williams Henschel
+* talk about how things we do impact our lives
+* HP protagonists are really research oriented
+* lots of comparisons with HP and symbolism that is completely lost on me; no real new insights :( 
+
+
+### Building A Non-Relational Backend For The ORM, Adam Alton
+* github: potatolondon/djangae
+* Potato builds stuff for Google and get lots of users from them
+* Datastore build around idea that whatever you're building is probably gmail :)
+	* every query must use an index
+		* no table scans
+		* max 1 inequality filter per query
+		* no JOIN queries
+		* OR queries are multiple simple queries in parallel
+	* indexes built and replicated asynchronously
+		* eventual consistency aka "where did my data go"
+		* no unique constraints except PK
+	* updating every row could take days
+		* no schema (because adding column is slow)
+		* transactions must query by PK
+	* random auto IDs (not auto-increment; auto-random)
+	* counting is slow
+* For django that means no ManyToMAnyField => no permissions, unique or unique_togther
+* no GenericForeignKey or concrete model inheritance
+* transactions are out as well as is Paginator (because wants to know how many pages there are)
+* Building a DB backend
+	* DatabaseFeatures class tells what DB can and cannot do
+	* ....
+* 15095 lines of code (2422 commits from 45 contributors)
+* normalising WHERE clauses
+	* WHERE (a=1 or b=2) AND c=3 => WHERE (a=1 and c=3) OR (b=2 AND c=3)
+* rebuilt ManyToManyField, Permissions, unique=True and most missing parts including admin (but not migrations)
+* still need migrations even on schema-less db because of queries
+	* they can take days
+
+
+### HTTP/2 : why upgrading the web?, Quentin ADAM
+* why new version? we need to be faster, faster, faster
+* HTTP/2 is a binary protocol
+* we should use it now! (better notes on benefits in my other notes)
+* url cannot change => two ways to manage for http and https
+	* how to negotiate a protocol upgrade
+	* http/1 build in method: upgrade header (still slow; needs 2 connections)
+	* we also need to encrypt the web (TLS)
+	* with HTTP/2 we use NON on client and ALPN on server
+* Python has a library called Hyper (1.0 release in Oct. 2015) - http://python-hyper.org
+* WSGI incompatible with HTTP/2? (need to switch from request/response model to channels)
+* use Wireshark!
+* clever-cloud.com gift coupon code: DJANGOCON16
+
+
+### Django Microservices Made Easy, Paul Hallett
+* moved to micro services because of hosts of problems, also Django ones (making migrations separately on same app)
+* 1st problem: shared database
+	* solution: always isolate dependencies as early as you can
+* 2nd problem: all new services were built differently (include things service discovery, error logging...) - inconsistent file structures
+	* solution: project templates using cookiecutter
+* 3rd problem: inconsistent HTTP interfaces (some very lovely REST, some less so), inconsistent integrations
+	* solution: education & guidelines!
+	* http://bit.ly/api-best-practices (guide Lyst wrote)
+	* second part of solution: client templates
+* final problem: consistent deployment (so any member of the team can deploy them)
+	* solution: Empire (open source platform that works on Amazon EC2 with heroku like interface)
+	* bit.ly/empire-pass
+* consistency is the key
+* Lyst got huge boost in productivity, tiny outside dependencies, increased team autonomy
+* where next?
+	* Platform
+	* Auto-generation (swagger? not good fit)
+	* we now have a lot of communication overhead (need to talk to developers of the service); trying to solve this with Protocol Buffers
+* Top questions (that you are doing things correctly)
+	* in depth: http://bit.ly/micro-10-q
+
+
+### Lightning talks
+
+#### Low-level love with NAND2Tetris, Nicolas Noe
+* it is important and fun to look at inner workings of abstractions we use
+* discovered NAND2TETRIS: learn how to build from scratch a complete computer (basic, but complete)
+* 12 weeks you build something more complex on top of what you built previous week
+* you use simulator for building hardware
+* http://nand2tetris.org
+
+#### Django REST framework - what's next?, Tom Christie
+* REST framework 4: client libraries & realtime
+* Client libs:
+	* dynamic client libraries
+	* either schema-driven or hyperdermia-driven
+	* Python & Javascript libraries
+	* command line client
+	* schema generation & hypermedia support
+* Realtime:
+	* documentation for using REST framework with Django channels
+	* client libraries support for WebSocket APIs
+* Sponsorships
+	* monthly paid plans & range of sponsor benefits
+	* collaboratively funded development - far greater return on investment than internal development
+* Beyond Django
+	* working on a cross-framework, cross-language, API framework
+	* work with Django when appropriate, switch to Flask, Falcon, Node when required
+* http://coreapi.org
+
+#### DjangoGirls Summit, Dalege Lucie
+* patreon.com/djangogirls (seeking funds) and paypal donations
+
+#### In-san-i-ty, Michal Lowas-Rzechonek
+* HTML5 is X11
+* WebSockets is TCP
+* Grunt is Make
+* NPM is APT
+* SASS is M4
+
+#### What's the time, Joachim Jablon
+* all time rules have special cases which might have special cases of their own
+* Australia has crazy timezones (6 moving separately)
+* TZ Data and Pytz
+* naive datetime does NOT exist
+* use UTC everywhere except to human beings
