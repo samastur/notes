@@ -407,3 +407,273 @@
 * TZ Data and Pytz
 * naive datetime does NOT exist
 * use UTC everywhere except to human beings
+
+
+
+## Day 3
+
+### Lightning talks
+
+#### Django Under the Hood
+* 3-6.11. in Amsterdam
+* 1.5 days of technical talks and 2 days of sprints
+
+#### Easy way to annotate your types, Dmitry Trofimov
+* def greeting(name: str) -> str: (similar to Typescript)
+* recent addition to PEP484 added very similar addition to Py2.7 with # type comment
+* feature added to PyCharm for automated adding of type information to existing code
+* missed switch required, but to work you need to run code in debugger for it to collect necessary information
+* typed code then gives us code completion for typed variables
+
+#### 6 steps to make beginning Tutorials more beginner friendly, Nicholle James
+* don't ever use words like "easy", "fast" and "simple"!
+* there is NO question that is stupid or boring!
+* many beginners don't think to Google first, don't expect it of them
+* don't assume a shared vocabulary
+* break it down more than you think you need to (30 pages with 3 instructions better than 3 pages with 30; less intimidating)
+* always have a backup plan (if you run tutorials, have thumb drive with software necessary)
+
+#### My 2 (or 3) favourite things about Django, Daniel Rios
+* 'self' for referencing foreign key to itself (and is documented)
+* it's organised (and documented)
+* it's got your back! (and documented)
+	* password allocation warns you about bad passwords
+
+#### Responsible DDoS, Akos Hochrein
+* the swiss cheese model: each service is a layer of cheese (has bugs that let hazards through)
+* they have a proxy relay that retries 4 times failed requests so one bad call killed 4 Django instances
+* first issue: slow serializer using a lot of memory
+* second issue: docker container had too little memory assigned
+* third issue: broken monitoring
+
+#### PyCon Namibia 2016, Daniele Procida
+* happened from January 25th to 29th
+* 118 attendees, 50% of whom were women
+* 63 Namibian students including 7 high school students, 32 Django Girls
+* most students attended for free because they couldn't afford it otherwise
+
+
+### From Intern to Professional Developer: Advice on a Mid-Career Pivot, Rebecca Conley
+* she made career transition recently (just turned 40)
+* she had a passion for dance, but knew it wouldn't be a way to make a living
+* became a teacher
+* worked in Cape Town designing a small business accelerator; also on Haiti
+* from Durham, North Carolina; town with economy that was based on tobacco which died out in early 80s
+* got inspiration and was persuaded that she can become software developer
+* so how?
+	* option 1: teach yourself (good, but not efficient)
+	* option 2: code school (job prospects after them are quite good)
+* what I expected: screenshot from Silicon Valley show
+	* a lot of barriers that she would encounter
+* met Caktus Group people at conference who showed their work on app for registering for vote in Libyan elections who encouraged her to apply for internship
+* what Cactus did:
+	* give her mentor (Django Core developer)
+	* worked on real client project, but they financed her time (invested a ton in her)
+* learned how to ask questions and make the most out of opportunity
+* today is a year since she was hired full time as professional developer
+* she now tries to help and create opportunities for others
+* why do we need Django developers who came from other careers?
+	* we build software for people; people who come from different background come with lots of useful experiences
+	* we benefit from diversity
+* how can we support people making a career transition?
+	* provide information
+	* encouragement
+	* training (running workshops, code school or funding training)
+	* mentorship (code school is effectively paying for a mentor)
+	* opportunity (companies need to be willing to hire people like her)
+* code newbies on Twitter; they provide a lot of resources for newcomers
+* http://whoisnicoleharris.com/connect/
+
+
+### Beyond Web 2.0 - Django and Python in the modern web ecosystem, Russell Keith-Magee
+* BeeWare: the IDEs of Python
+* Quo vadiums? Does Django have future in this new world or will we all become Javascript developers?
+* 2005: most websites were very simple affairs with light requirements reflected in Django's architecture (models, views, urls, forms and templates)
+	* the most exotic thing may have been memcache
+	* Google Maps was the exception, not the rule
+* 2016: more exotic databases; expectations of UI have changed (code duplication); exposing APIs
+	* increasingly we need to deliver content to native apps
+	* user want live updates so we need channels...
+* all sorts of potential for duplication
+* this has led to development of rich client frameworks
+* adding RCF doesn't fix any of the underlying problems, if anything it makes it worse
+* this is the driving force behind Isomorphic Javascript Development so you use the same code on both sides
+* this doesn't help you if your backend is Python
+* why is Isomorphic Javascript Development being proposed? is it for isomorphic or Javascript?
+* JS the only significant advantage is that is available in browser which is a huge advantage
+* but extra tooling is already on the table because of native mobile apps
+* everything old is new again
+	* we tried to do isomorphism with Java in 90s
+	* we learned then that MVC is a good way to handle that requirements
+* API-first development
+	* easier to test
+	* improves API if this is what EVERYONE has to use
+* high latency connections or no connection at all
+	* you need to replicate part of the logic on client side
+	* need Python on client
+* Brython, Skuplt and PyPy.js are three ways of getting some subset of Python on client
+* does it work? yes, BUT...
+	* you need to deliver 500K interpreter first
+	* also inefficient as it needs to interpret
+* but do we need the full Python interpreter?
+	* we just need to be able to run it; so why not ship unable version of that code?
+* .pyc files and bytecode => Batavia is a JS implementation of Python VM (10K size for 100 py op codes)
+	* can even access DOM
+	* but is not fast, but we don't want to implement everything; mostly validation and maybe a bit of logic
+* now we got a nicer separation
+* on IOS you can access its API through Python because it's really just C underneath
+* Android is more tricky and doesn't work well
+* Russel has been working on VOC that converts Python to Java (missed bit of explanation :()
+* but you still have separate codebase for IOS and Android, unless...
+	* you use Kivy which doesn't use native buttons (app never looks like native)
+	* or Toga where you get native experience, but not as mature (experimental)
+* Toga for web?
+	* he wrote a backend that targets web
+	* freakboy3742.pythonanyware.com
+* all this is possible right now, but isn't enough
+	* unless it is easy and obvious solution, then these approaches won't get used
+	* challenge is to build a mobile chat app in 15 minutes
+* Django hasn't changed much in 10 years, but we are at risk of being boiled slowly like a frog if we don't evolve
+
+
+### Let's Talk Geo: Adding the "Where" to Your Django Project, Corryn Smith
+* works with GIS, analysing data on maps
+* different presentations: lang/lot, UTM, State plans...
+* where is important because it shows us things like accessibility or potential problems
+* is map reading dead? geography is not taught anymore? (not really taught in USA anymore)
+* she uses ArcMap - ESRI suite which also installs Python
+	* can automate tasks with ArcPy
+	* Python Scripting for ArcGIS book
+* GEODJANGO = web framework to create geographic web applications
+	* GeoDjango tutorial is great
+	* can be overwhelmed by terms: Shapefile, SID...
+* Checklist:
+	* Spatial DB: need to be able to hold geometry (Postgresql with CREATE EXTENSION postgis;)
+	* Geo data: Shapefile - geospatial vector file that are either point/lines or polygons
+		* .shx (shape index format)
+		* .shp (shape format/geometry)
+		* .dbf (attribute data)
+		* .prj (projection)
+		* .sbn ... (find slides for links and missing bits)
+	* QGIS alternative to expensive ArcMap
+	* Geographic Model
+		* your model should duplicate the fields in your shape file
+	* importing geo data
+	* Geographic Friendly Admin: from django.contrib.gis import admin
+		* add data through admin only in emergency
+	* Geo-friendly API
+	* Mapbox (mapbox.com): adds the map to your project
+	* Leaflet for customising map's look
+
+
+### Best practices for scaling Django, Anton Pirker
+* biggest project he worked on had 1M unique mostly users
+* too many queries
+	* should use select_related and prefetch_related
+* separate db and web server
+* next improvement: memcache (can check if it works with timestamp in generated page)
+	* cache being busted because cookies are changing and Django assumes that change happened
+	* can't just delete all cookies because it breaks sessions (delete non-Django ones)
+* problem: bad gateway occasionally => hitting postgres connection limit
+	* PgBouncer to the rescue (connection pooling)
+* Celery + Redis for async tasks
+	* Celery Flower for monitoring
+	* have multiple queues for tasks of different importance
+* next steps: putting elements on separate servers
+
+
+### Don't be afraid of writing migrations, Markus Holtermann
+* 3 recipes for writing migrations (when Django can't automatically)
+* he'll publish repo with recipe examples that will grow over time
+* class Migration(migrations.Migration) is required
+* dependencies attribute lists which migrations need to be executed before this one can run
+* Recipe 1: optimising makemigrations output
+	* creating Book and Library models creates book, library and then foreign key from book to library
+	* optimisation is to create Library first and then Book together with FKey
+	* Django doesn't do it so because it sorts creation alphabetically and determinism
+* Recipe 2: adding a non-null field (in multiple migrations)
+	* create nullable field
+	* populate field with data (probably from external source, but needs to cover **all** objects)
+	* make field nullable and select option 2 (ignore for now)
+* Recipe 3: rename an app without dependencies
+	* you can't have incoming foreign keys to this app
+	* rename table in migration
+	* set db_table in model's Meta class to current value and create migration for it
+	* apply with zero --fake
+	* now we can rename files everywhere except db_table attribute
+	* apply with plain --fake
+* when renaming tables it (probably) doesn't rename constraints (or indexes?)
+
+
+### Safe-Ish by Default: The Django Security Model and How to Make it Better, Philip James
+* things Django does out of the box to keep us safe and what we could do to really lock things down
+* XSS: yes, with template escaping (can get around with mark_safe(), |n, |safe)
+* CSRF: yes, CSRF middleware (token)
+	* CSRF cookie not set HTTP only! (so that AJAX can make correct request)
+* SQLi: "Don't ever confuse code and data, it's the key to happiness" -- Alex Gaynor
+	* yes, SQL statement and parameters are kept separate till the end
+	* can get around with .extra() and RawSQL() so be careful about their use
+* Clickjacking: protected with XFrameOptionsMiddleware
+* Host Header Validation: ALLOWED_HOSTS necessary so that generated urls don't point to the wrong site
+* Sessions: if you don't control subdomains, then your cookies may leak!
+* Passwords: automatic algorithm upgrades (rehashes passwords of users on login if their stored is for old hash)
+* how to improve
+	* Constant Vigilance! (always check if exemptions are used)
+	* HTTPS
+	* CSP Reporting (Content Security Policy) - especially if you have content from 3rd parties
+	* django_encrypted_fields (defrex/django_encrypted_fields) is great for storing data that needs to be encrypted
+	* django-secure (slowly being subsumed by Django)
+	* Pony Checkup (https://www.ponycheckup.com)
+	* making Django ridiculously secure talk from djangocon 2015
+
+
+### Using Django with service workers, Adrian Holovaty
+* ServiceWorker is a proxy in browser you control (so you can massage requests and responses, store them...)
+	* has fetch() API
+	* can cache (separately from browser)
+	* arbitrary JS
+* once ServiceWorker loads, browser will send all following requests through it (but there can be those that didn't go before it was loaded)
+* possibilities:
+	* cache
+	* preload assets
+	* alter data depending on user/browser
+	* loading JS framework and using it
+* how to use with Django?
+	* create offline page that is nicer
+	* "cumulative cache" offline mode (as user visits pages you cache them so you can show them later)
+	* "UI cache" offline mode (can request something for later usage)
+* Problem 1: we're caching too much
+	* probably caching empty base.html is a good approximation of what to cache (App Shell architecture)
+	* on page load, make Ajax request for current URL with "from_appshell=1" so you return just the content, not the entire template
+	* if you don't have quotes in template extend, then you are basically calling a variable and so you can replace base_template in render function call
+* Problem 2: Cache invalidation
+	* Cache-invalidation strategies:
+		* static assets: use hashed URLs (CSS, JS, images)
+		* App shell: remember last-updated time and periodically refresh
+		* App shell: refresh it on every page load
+		* Data: give users a way to clear the cache
+
+
+
+### Lightning talks
+
+#### GraphQL, Idan Gazid
+* strongly-typed declarative query language
+* you ask for data in the way you want it (you get in a shape you asked for)
+* reduce number of network requests
+* GET for queries and POST for everything else
+* graphene-python.org for Python
+
+#### PostgrSQL full text search
+* no additional dependency
+* strong integration with relational data
+* in Django nearly landed (__search)
+* performance not great, add functional indexes
+
+#### async/await in 5 minutes, Milan Stanojevic
+* coroutines - functions whose execution you can pause
+* event loop added in Python 3.4
+* async/await is not synonymous with asyncio
+
+
+http://djangocon.eu/badge (recording of what is on cassette badge)
