@@ -105,3 +105,23 @@
     * produces robust code (because execution paths get more used)
     * enables an efficient workflow
 * github:kyleknap/dynamic-web-api-clients
+
+
+## Training: IPython in Depth - Mike Bright
+* double-click on cell to start editing and shift+enter to render result
+* selecting works as elsewhere (shift+arrows to select more/fewer)
+* keyboard shortcuts are in help menu
+* _ references content of the previous cell; you can surpress output with
+  ending output with semicolon (;)
+* we can explicitly reference cells with: Out[x]
+* Note that this means that the IPython notebook server also acts as a generic
+  file server for files inside the same tree as your notebooks. Access is not
+  granted outside the notebook folder so you have strict control over what
+  files are visible, but for this reason it is highly recommended that you do
+  not run the notebook server with a notebook directory at a high level in your
+  filesystem (e.g. your home directory).
+* new notebooks are by default deemed untrusted, but you can change that if you
+  are certain
+* nbviewer or RISE are interesting slideshow tools (not sure which one it was)
+* adding JS widgets is great to add interactivity to notebooks (sliders,
+  checkboxes...)
