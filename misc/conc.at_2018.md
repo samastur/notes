@@ -193,14 +193,147 @@
 
 ## Thinking PRPL, Houssein Djirdeh
 
+* pattern to use to make apps load fast
+* Push Render Pre-cache Lazy-load (PRPL)
+* rel="preload" as="script" - preload resources that are critical for user
+	* best used for resources discovered much later
+	* "as" used for different types of resources
+* rel="prefetch" will load as soon as possible, but first what it needs for
+  current page
+* Webpack: preload-webpack-plugin
+* preload works everywhere but Edge where it is in development
+* HTTP/2 Server Push
+	* the idea behind is that as browser makes request, we push assets we know
+	  it will need with that document
+	* you can push too much so if you are not careful you can cause more harm
+	* be sure those assets will be used
+	* it also ignores cache (pushing happens even if those assets are already
+	  in browser cache)
+* Service Worker - script running in background of your browser
+	* npm: workbox-cli (for generating service worker)
+* Worth precaching:
+	* application shell (stuff without data)
+* better to use workbox as dev dependency in build scripts so it always current
+* service worker fetch strategies: networkFirst, cacheFirst,
+	  staleWhileRevalidate, cacheOnly, networkOnly
+* workbox wizard --injectManifest
+
+
 ## Fast. Simple. Accessible., Estelle Weyl
+
+* [Slides?](https://estelle.github.io/concat/)
+* Check: [CSS? WTF!](http://instartlogic.github.io/p/wtf/)
+* nobody she talked to knew how radio button works (name attribute, radio group)
+* shows how to effectively use HTML and specifically radio input to make
+  dynamic accessible interface
+* if you set display:grid on table, it is not read as table anymore by screen
+  readers
+
 
 ## The Strategy Guide to CSS Custom Properties, Mike Riethmuller
 
+* a bit like variables in preprocessors
+* --custom-property in CSS
+* custom properties can be used where properties are valid (inside of {})
+* var() can be used where values are valid (value, shorthand, calc()... but not
+  media rules)
+* difference in scope (preprocessors are statically scoped; when rendered all
+  are static)
+* custom properties dynamically scoped so a subject to inheritance and cascade
+	* can change for example in media query
+	* can have different values in different parts of page
+* global vs. local
+	* by default scoped to selectors (local)
+	* also inherited (kinda global)
+	* global variables are almost always static
+		* makes sense to still use a preprocessor for static variables so it is
+		  clear when you read which values shouldn't be changed
+	* perfectly ok to have locally static variables
+	* find slides to see handling button
+* don't be too clever
+* strategy: change the value, not the variable (change value in media query,
+  but use same variable)
+* strategies for responsive design
+	* if it changes, it is a variable
+	* media queries should only be used for changing custom properties
+	* separate logic from design (var statements tell us these are values that
+	  will change)
+	* the logic fold bellow which we only have design logic
+* strategies for theming
+	* capitalise global custom properties
+* set custom properties with Javascript: node.style.setProperty(propertyName, value);
+	* can also be used in style attributes
+* use custom properties now!
+	* postcss-css-variables (not the other ones)
+
+
 ## Remote device sign-in – Authenticating without a keyboard, Tiffany Conroy
+
+* everything in talk is contained in her blog post that will be linked at the
+  end of her talk
+* effectively like bluetooth pairing where you enter the code on device with
+  friendly input method (where you are also already signed in)
+* well, better than BLE pairing with some really interesting ideas (coming
+  mostly from Google's implementation)
+* [Details](https://developers.soundcloud.com/blog/remote-device-sign-in)
+
 
 ## Styled Components, Max Stoiber
 
+* maybe it makes sense to do styling at the component level
+* what if you wrote _actual_ CSS in Javascript? (first prototype)
+* next version: use functions for conditional styling
+* where styled-components come from
+* basically story about [this](https://www.styled-components.com)
+* supports all css, which gets parsed and then inserted in head of DOM
+* worth looking into since it simplifies component use and remove context
+  specific per-component classes
+
+
 ## Lighting talks
 
+* a11y
+	* quotation marks used in text change depending on language used for HTML
+	  document
+	* it also changes how screen readers read it
+	* language influences date/number inputs, hyphenation...
+* Linting
+	* prettier: a better linter and automatic code fixer (eslint can do too?)
+	* lint-staged: run lint only on changed files (so not overwhelmed on old big
+	  projects)
+* git bisect
+	* git bisect start
+	* git bisect bad master
+	* git bisect good v4.2
+	* git checks out commits through bisection and we need to tell if commit is
+	  good or bad (with git bisect bad/good)
+	* look into:
+		* git bisect run npm test
+		* git bisect skip
+		* git bisect terms
+		* git bisect replay
+
+
 ## Unlocking the power of SVG — SVGs beyond icons and illustrations, Sara Souiedan
+
+* cropping, scaling and aspect ratio: SVG viewBox and preserveAspectRatio
+	* the SVG viewport != viewBox
+	* viewport defined by width and height of SVG root element
+	* viewBox is only the part you see of (infinite) SVG: defines coord. system
+	  browser will use for drawing
+* browser support for object-fit/object-position is not great yet, but we can
+  use SVG for this
+	* <image xlink:href="..." width="100%" height="100%"></image> inside of SVG
+	* problem missing alt attribute => add title element to SVG
+	* problem: can provide only one images (need more for different
+	  resolutions, density) => use foreignObject that includes for example
+	  picture
+* optimizing image sizes with SVG masks (so we can add transparency to jpeg)
+* optimizing SVG delivery with...SVG
+	* check video: looks interesting
+* don't capitalize in HTML because of screen readers (they think its
+  abbreviation)
+* effect of rough paper created with two filters and no images
+* conditional processing in SVG (providing fallbacks natively using SVG itself)
+* if you have two inline SVGs on the page, then styles found in one will also
+  be applied to the other one
